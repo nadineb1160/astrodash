@@ -23,10 +23,10 @@ body {
     /* margin-top: 200px; */
     display: none;
 }
-
+/* 
 #horoscope-description {
-    /* display: none; */
-}
+    display: none;
+} */
 
 #bday-count-head {
     bottom: 110px;
