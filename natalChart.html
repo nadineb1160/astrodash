@@ -30,7 +30,7 @@
                 <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav">
 
-                        <li class="uk-active">
+                        <li>
                             <!-- This is an anchor toggling the modal -->
                             <a href="#modal-example" uk-toggle>Click for horoscope!</a>
                         </li>
@@ -52,13 +52,14 @@
 
                         <!-- This is the modal -->
                         <div id="modal-example" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body" id="bday-form">
+                            <div class="uk-modal-dialog" id="bday-form">
                                 <!-- <h2 class="uk-modal-title">Enter your birthday!</h2> -->
                                 <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top">
                                     <fieldset class="uk-fieldset">
 
                                         <legend class="uk-legend">Fill in your Birthday to learn more about your
-                                            horoscope:</legend>
+                                            horoscope:
+                                        </legend>
 
                                         <br>
 
@@ -97,7 +98,6 @@
         </div>
 
     </div>
-
     <script id="aonline" src="https://astro-app.net/apps-aon.js?ENcceefaffffdd141"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
