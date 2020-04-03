@@ -15,25 +15,27 @@
 
 <body>
 
-    <!-- Picture -->
+    <!-- Main Image -->
     <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
         style="background-image: url('https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg');"
         id="background">
 
+        <!-- Logo -->
         <h1 class="uk-heading-medium" id="heading"><a href="index.html">AstroDash</a></h1>
 
         <br>
 
+        <!-- Navigation bars -->
         <div id="navbar">
             <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
                 <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav">
-
                         <li class="uk-active">
                             <!-- This is an anchor toggling the modal -->
                             <a href="#modal-example" uk-toggle>Click for horoscope!</a>
                         </li>
 
+                        <!-- Astrology dropdown menu -->
                         <li>
                             <a href="#">Astrology</a>
                             <div class="uk-navbar-dropdown">
@@ -46,10 +48,11 @@
                             </div>
                         </li>
 
+                        <!-- Natal chart link -->
                         <li><a href="natalChart.html">Natal Chart</a></li>
 
 
-                        <!-- This is the modal -->
+                        <!-- Birthday modal -->
                         <div id="modal-example" uk-modal>
                             <div class="uk-modal-dialog" id="bday-form">
 
@@ -81,6 +84,7 @@
 
                                         </div>
 
+                                        <!-- Submit button -->
                                         <div class="uk-margin-top uk-width-1-2">
                                             <button class="uk-button uk-button" id="bday-submit">Submit</button>
                                         </div>
@@ -97,6 +101,7 @@
             </nav>
         </div>
 
+        <!-- Horoscope Display -->
         <h3 class="uk-heading-medium uk-position-center" id="signs">
 
             <!-- Horoscope Name -->
@@ -110,11 +115,10 @@
 
 
         <!-- Birthday Countdown -->
-        <div class="uk-position-small uk-position-bottom-right uk-height-small uk-padding" uk-grid
-            uk-countdown="date: 2020-04-08T23:18:57+00:00" id="bday-countdown">
+        <div class="uk-position-small uk-position-top-right uk-height-small uk-padding" uk-grid
+            uk-countdown="date: 2020-04-08T00:00:00+00:00" id="bday-countdown">
 
-            <h1 class="uk-heading-small uk-position-bottom-right uk-margin-right" id="bday-count-head">Birthday
-                Countdown:</h1>
+            <h3 class="uk-position-bottom-right uk-margin-right" id="bday-count-head">Birthday countdown:</h3>
 
             <div>
                 <div class="uk-countdown-number uk-countdown-days"></div>
@@ -140,8 +144,9 @@
 
     <div class="uk-container uk-container-large">
 
-        <!-- Scrollspy cards - left and right -->
+        <!-- Horoscope API Data -->
         <div class="uk-child-width-1-2@m uk-grid-match" id="horoscope-description" uk-grid>
+            <!-- Horoscope 1 -->
             <div>
                 <div class="uk-card uk-card-default uk-card-body horoscope1"
                     uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
@@ -150,6 +155,7 @@
                 </div>
             </div>
 
+            <!-- Horoscope 2 -->
             <div>
                 <div class="uk-card uk-card-default uk-card-body horoscope2"
                     uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
@@ -159,9 +165,7 @@
             </div>
         </div>
 
-
         <br>
-
 
         <!-- Tiles -->
         <div class="uk-child-width-1-4@s uk-grid-collapse uk-text-center uk-margin-top" uk-grid>
@@ -194,6 +198,7 @@
         <br><br>
 
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+            <!-- Weather App -->
             <div class="uk-child-width-1 uk-grid-match uk-height-large" id="weather">
                 <div class="uk-background-fixed uk-background-center-center uk-align-left uk-height-large"
                     style="background-image: url(https://cdn.pixabay.com/photo/2016/11/29/04/28/cloud-1867317_1280.jpg);"
@@ -214,6 +219,7 @@
                 </div>
             </div>
 
+            <!-- Pollen App -->
             <div class="uk-child-width-1 uk-grid-match uk-height-large" id="pollen">
                 <div class="uk-background-fixed uk-background-center-center uk-align-right uk-height-large"
                     style="background-image: url(https://cdn.pixabay.com/photo/2020/03/14/16/47/bee-4931194_1280.jpg);"
@@ -234,7 +240,7 @@
 
         <br><br>
 
-        <!-- Scrollspy cards top and bottom -->
+        <!-- Quotes -->
         <div class="uk-child-width-1-3" uk-grid
             uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; delay: 300; repeat: true">
             <div>
