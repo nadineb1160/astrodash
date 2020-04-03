@@ -1,10 +1,14 @@
 // Once document is loaded
 var resp = "";
+var bday, astrosign, czodiac, keyword, sentiment;
 
 $(document).ready(function () {
   var horoscope = "cancer";
 
   var tsign = "";
+
+  // Variables for API search
+  var compatibility, mood, color, lucky_num, lucky_time;
 
   var month, day, year, date;
 
@@ -15,23 +19,38 @@ $(document).ready(function () {
     day = $("#bday-day").val();
     year = $("#bday-year").val();
 
-    date = month + "/" + day + "/" + year;
+    date = year + "-" + month + "-" + day;
 
-    // *only submit once
+    bday = moment(date, "YYYY-MM-DD", true);
+
+    if (!bday.isValid()) {
+      alert("Date entered is not valid!");
+    }
+
+    console.log("bday = " + bday);
 
     // Get Western Zodiac
-    horoscope = getZodiac(date);
+    astrosign = getZodiac(bday);
+    console.log("astrosign=" + astrosign);
 
     // Get Chinese Zodiac
-    tsign = chineseZodiac(date);
+    czodiac = chineseZodiac(bday);
+    console.log("czodiac=" + czodiac);
 
-    console.log(horoscope);
-    console.log(tsign);
+    getHoroscope(astrosign, getDataBoth);
+    // resp now contains the horoscope
+    // keyword now has the keyword from horoscope
+    // sentiment now has sentiment from horoscope
+    //
 
-    $("#horoscopeName").text("Astrological sign " + horoscope);
+    $("#horoscopeName").text("Astrological sign " + astrosign);
     $("#and").attr("style", "display: block");
-    $("#zodiacName").text("Year of the " + tsign);
-  
+    $("#zodiacName").text("Year of the " + czodiac);
+
+    timerSet(date);
+    console.log(resp);
+    horoscopeSet(resp);
+
   });
 
   function getZodiac(indate) {
@@ -159,7 +178,7 @@ $(document).ready(function () {
 
     tsign = zodiacTable[tlunarYear % 12];
 
-    console.log(tsign);
+    console.log("tsign = " + tsign);
 
     return tsign;
 
@@ -169,8 +188,8 @@ $(document).ready(function () {
 
   // callback function for horoscope call
   function getDataBoth() {
-    getKeyword();
-    getSentiment();
+    keyword = getKeyword();
+    sentiment = getSentiment();
   }
 
   function getSentiment() {
@@ -244,9 +263,8 @@ $(document).ready(function () {
     // var queryURL = "https://cors-anywhere.herokuapp.com/https://sandipbgt.com/theastrologer/api/horoscope/"+horoscope+"/today/"
     // var res;
 
-    var sign = horoscope.lower()
-    var queryURL =
-      "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
+    var sign = horoscope.toLowerCase();
+    var queryURL = "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
 
     $.ajax({
       type: "POST",
@@ -255,12 +273,91 @@ $(document).ready(function () {
     }).then(function (response) {
       // options = response.description;
       resp = response.description;
-      // console.log(response);
+      console.log(resp);
+      console.log(response);
       // console.log(response.description);
       // console.log("options="+options)
       // console.log("resp="+resp)
+
+      compatibility = response.compatibility;
+      mood = response.mood;
+      color = response.color;
+      lucky_num = response.lucky_number;
+      lucky_time = response.lucky_time;
+
+
       callback();
     });
+  }
+
+  // Set horoscope API info
+  function horoscopeSet(resp) {
+    console.log("resp=" + resp);
+    $("#horoscope1").text(resp);
+  }
+
+  // Date had format YYYY-MM-DD
+  function timerSet(date) {
+
+    // Get current day
+    var currentDay = moment().format("YYYY-MM-DD");
+    console.log(currentDay);
+
+    currentDay = currentDay.split("-");
+    console.log("Current Day: ")
+    console.log(currentDay);
+    var yearCurrent = currentDay[0];
+    var monthCurrent = currentDay[1];
+    var dayCurrent = currentDay[2];
+
+    // split data to change date
+    date = date.split("-");
+    var yearBday = date[0];
+    var monthBday = date[1];
+    var dayBday = date[2];
+
+    var yearNextBday;
+
+    // Bday month has not occured this year
+    if (monthBday > monthCurrent) {
+      yearNextBday = yearCurrent;
+    }
+
+    // Currently in bday month
+    else if (monthBday === monthCurrent) {
+
+      // Bday coming this month
+      if (dayBday > dayCurrent) {
+        yearNextBday = yearCurrent;
+      }
+      // Bday has occured this year or is today
+      else {
+        // Bday today
+        if (dayBday === dayCurrent) {
+          console.log("It's your bday");
+          // alert it's your bday
+        }
+        // Countdown till next
+        yearNextBday = parseInt(yearCurrent) + 1;
+      }
+
+    }
+
+    // Bday month has already passed
+    else {
+      yearNextBday = parseInt(yearCurrent) + 1;
+    }
+
+    // Change bday year to next bday year
+    date = yearNextBday + "-" + monthBday + "-" + dayBday;
+
+    // console.log(date);
+
+    date += "T00:00:00+00:00";
+    console.log(date);
+    $("#bday-countdown").attr("uk-countdown", "date: " + date);
+    $("#bday-countdown").attr("style", "display:block");
+
   }
 
   // call it with the sign
