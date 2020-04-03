@@ -30,6 +30,44 @@ body {
 
 #bday-count-head {
     bottom: 110px;
+}
+
+h3 {
+    color:  black;
+}
+
+#natalChart {
+    top: 50px;
+    right: 50px;
+}
+
+.uk-overlay-default {
+    width: 100%;
+}
+
+.horoscope1, .horoscope2 {
+    background-color: #fafafa;
+}
+
+.tileA {
+    background-color:#ffe0b2;
+}
+
+.tileB {
+    background-color: #ffa726;
 
 }
 
+.quote1 {
+    background-color:#bbdefb;
+}
+.quote2 {
+    background-color:#e6ee9c;
+}
+.quote3 {
+    background-color: #f8bbd0;;
+}
+
+#and {
+    display: none;
+}

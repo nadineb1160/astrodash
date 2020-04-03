@@ -28,8 +28,9 @@ $(document).ready(function () {
     console.log(horoscope);
     console.log(tsign);
 
-    $("#horoscopeName").text(horoscope);
-    $("#zodiacName").text(tsign);
+    $("#horoscopeName").text("Astrological sign " + horoscope);
+    $("#and").attr("style", "display: block");
+    $("#zodiacName").text("Year of the " + tsign);
   
   });
 

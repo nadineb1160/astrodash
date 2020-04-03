@@ -102,6 +102,8 @@
             <!-- Horoscope Name -->
             <p id="horoscopeName"></p>
 
+            <p id="and">&</p>
+
             <!-- Chinese Zodiac Name -->
             <p id="zodiacName"></p>
         </h3>
@@ -141,7 +143,7 @@
         <!-- Scrollspy cards - left and right -->
         <div class="uk-child-width-1-2@m uk-grid-match" id="horoscope-description" uk-grid>
             <div>
-                <div class="uk-card uk-card-default uk-card-body"
+                <div class="uk-card uk-card-default uk-card-body horoscope1"
                     uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
                     <h3 class="uk-card-title">Horoscope 1</h3>
                     <p id="horoscope1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -149,7 +151,7 @@
             </div>
 
             <div>
-                <div class="uk-card uk-card-default uk-card-body"
+                <div class="uk-card uk-card-default uk-card-body horoscope2"
                     uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
                     <h3 class="uk-card-title">Horoscope 2</h3>
                     <p id="horoscope1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -165,24 +167,24 @@
         <div class="uk-child-width-1-4@s uk-grid-collapse uk-text-center uk-margin-top" uk-grid>
 
             <div>
-                <div class="uk-tile uk-tile-muted">
+                <div class="uk-tile tileA">
                     <p class="uk-h4">Word 1</p>
                 </div>
             </div>
 
             <div>
-                <div class="uk-tile uk-tile-secondary">
+                <div class="uk-tile tileB">
                     <p class="uk-h4">Word 2</p>
                 </div>
             </div>
             <div>
-                <div class="uk-tile uk-tile-muted">
+                <div class="uk-tile tileA">
                     <p class="uk-h4">Word 3</p>
                 </div>
             </div>
 
             <div>
-                <div class="uk-tile uk-tile-secondary">
+                <div class="uk-tile tileB">
                     <p class="uk-h4">Word 4</p>
                 </div>
             </div>
@@ -190,49 +192,75 @@
 
 
         <br><br>
-        <div class="uk-child-width-1-2 uk-grid-match" id="weatherImg" uk-grid>
-            <div class="uk-background-fixed uk-background-center-center uk-align-left uk-height-large"
-                style="background-image: url(https://cdn.pixabay.com/photo/2016/11/29/04/28/cloud-1867317_1280.jpg);">
 
-                <div class="uk-child-width-1-2 uk-height-small">
-                    <div class="uk-card uk-card-default uk-card-large uk-card-hover uk-card-body">
-                        <h3 class="uk-card-title">Weather</h3>
-                        <h5 class="uk-card-title">Temperature:</h5>
-                        <h3 class="uk-card-title">Humidity:</h3>
-                        <h3 class="uk-card-title">UV-index:</h3>
+        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+            <div class="uk-child-width-1 uk-grid-match uk-height-large" id="weather">
+                <div class="uk-background-fixed uk-background-center-center uk-align-left uk-height-large"
+                    style="background-image: url(https://cdn.pixabay.com/photo/2016/11/29/04/28/cloud-1867317_1280.jpg);"
+                    id="weatherImg">
+
+                    <div class="uk-child-width-1-2 uk-height-1-1 uk-overlay" id="weatherText">
+                        <div class="uk-card uk-card-default uk-card-large uk-card-body uk-height-1-1 uk-overlay-default">
+                            <div>
+                                <h3 class="uk-card-title">Weather</h3>
+                                <p>Temperature: 89</p>
+                                <p>Humidity: 42</p>
+                                <p>UV-index: 5</p>
+                            </div>
+                           
+                        </div>
                     </div>
+
+                </div>
+            </div>
+
+            <div class="uk-child-width-1 uk-grid-match uk-height-large" id="pollen">
+                <div class="uk-background-fixed uk-background-center-center uk-align-right uk-height-large"
+                    style="background-image: url(https://cdn.pixabay.com/photo/2020/03/14/16/47/bee-4931194_1280.jpg);"
+                    id="pollenImg">
+
+                    <div class="uk-child-width-1-2 uk-height-1-1 uk-overlay" id="pollenText">
+                        <div class="uk-card uk-card-default uk-card-large uk-card-body uk-height-1-1 uk-overlay-default">
+                            <h3 class="uk-card-title">Pollen</h3>
+                            <p>Count: 30</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>
+
+
+        <br><br>
+
+        <!-- Scrollspy cards top and bottom -->
+        <div class="uk-child-width-1-3" uk-grid
+            uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; delay: 300; repeat: true">
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body quote1">
+                    <h3 class="uk-card-title">Quote</h3>
+                    <p>This is a quote about horoscope</p>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body quote2"
+                    uk-scrollspy-class="uk-animation-slide-top">
+                    <h3 class="uk-card-title">Quote</h3>
+                    <p>This is a quote about chinese zodiac</p>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body quote3">
+                    <h3 class="uk-card-title">Quote</h3>
+                    <p>This is a quote about the weather</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
     </div>
-
-    <br><br>
-
-    <!-- Scrollspy cards top and bottom -->
-    <div class="uk-child-width-1-3" uk-grid
-        uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; delay: 300; repeat: true">
-        <div>
-            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                <h3 class="uk-card-title">Quote</h3>
-                <p>This is a quote about horoscope</p>
-            </div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-hover uk-card-body" uk-scrollspy-class="uk-animation-slide-top">
-                <h3 class="uk-card-title">Quote</h3>
-                <p>This is a quote about chinese zodiac</p>
-            </div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                <h3 class="uk-card-title">Quote</h3>
-                <p>This is a quote about the weather</p>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <br>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
