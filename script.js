@@ -1,106 +1,131 @@
 // Once document is loaded
 var resp = "";
 
-$(document).ready(function() {
+$(document).ready(function () {
   var horoscope = "cancer";
 
-  $(".submit").on("click", function(event) {
+  var tsign = "";
+
+  var month, day, year, date;
+
+  $("#bday-submit").on("click", function (event) {
     event.preventDefault();
+
+    month = $("#bday-month").val();
+    day = $("#bday-day").val();
+    year = $("#bday-year").val();
+
+    date = month + "/" + day + "/" + year;
+
+    // *only submit once
+
+    // Get Western Zodiac
+    horoscope = getZodiac(date);
+
+    // Get Chinese Zodiac
+    tsign = chineseZodiac(date);
+
+    console.log(horoscope);
+    console.log(tsign);
+
+    $("#horoscopeName").text(horoscope);
+    $("#zodiacName").text(tsign);
+  
   });
 
-  function getZodiac (indate) {
+  function getZodiac(indate) {
     var tdate = moment(indate); // any date will be converted
-    
+
     console.log(tdate.calendar())
     // console.log(tdate);
     var day = tdate.date();
-    var month = tdate.month()+1;
+    var month = tdate.month() + 1;
 
-    console.log(month+" // "+day)
+    console.log(month + " // " + day)
 
     // Capricorn - Dec 22 - Jan 19
     if (
-        (month == 12 && day >= 22) ||
-        (month == 1 && day <= 19)
+      (month == 12 && day >= 22) ||
+      (month == 1 && day <= 19)
     ) {
-        return (horoscope = "capricorn");
+      return "Capricorn";
     }
     // Aquarius - Jan 20 - Feb 18
     else if (
-        (month == 1 && day >= 20) ||
-        (month == 2 && day <= 18)
+      (month == 1 && day >= 20) ||
+      (month == 2 && day <= 18)
     ) {
-        return (horoscope = "aquarius");
+      return "Aquarius";
     }
     // Pisces - Feb 19 - March 20
     else if (
-        (month == 2 && day >= 19) ||
-        (month == 3 && day <= 20)
+      (month == 2 && day >= 19) ||
+      (month == 3 && day <= 20)
     ) {
-        return (horoscope = "pisces");
+      return "Pisces";
     }
     // Aries - March 21 - April 19
     else if (
-        (month == 3 && day >= 21) ||
-        (month == 4 && day <= 19)
+      (month == 3 && day >= 21) ||
+      (month == 4 && day <= 19)
     ) {
-        return (horoscope = "aries");
+      return "Aries";
     }
     // Taurus - April 20 - May 20
     else if (
-        (month == 4 && day >= 20) ||
-        (month == 5 && day <= 20)
+      (month == 4 && day >= 20) ||
+      (month == 5 && day <= 20)
     ) {
-        return (horoscope = "taurus");
+      return "Taurus";
     }
     // Gemini - May 21 - June 20
     else if (
-        (month == 5 && day >= 21) ||
-        (month == 6 && day <= 20)
+      (month == 5 && day >= 21) ||
+      (month == 6 && day <= 20)
     ) {
-        return (horoscope = "gemini");
+      return "Gemini";
     }
     // Cancer - June 21 - July 22
     else if (
-        (month == 6 && day >= 21) ||
-        (month == 7 && day <= 22)
+      (month == 6 && day >= 21) ||
+      (month == 7 && day <= 22)
     ) {
-        return (horoscope = "cancer");
+      return "Cancer";
     }
     // Leo - July 23 - Aug 22
     else if (
-        (month == 7 && day >= 23) ||
-        (month == 8 && day <= 22)
+      (month == 7 && day >= 23) ||
+      (month == 8 && day <= 22)
     ) {
-        return (horoscope = "leo");
+      return "Leo";
     }
     // Virgo - Aug 23 - Sept 22
     else if (
-        (month == 8 && day >= 23) ||
-        (month == 9 && day <= 22)
+      (month == 8 && day >= 23) ||
+      (month == 9 && day <= 22)
     ) {
-        return (horoscope = "virgo");
+      return "Virgo";
     }
     // Libra - Sept 23 - Oct 22
     else if (
-        (month == 9 && day >= 23) ||
-        (month == 10 && day <= 22)
+      (month == 9 && day >= 23) ||
+      (month == 10 && day <= 22)
     ) {
-        return (horoscope = "libra");
+      return "Libra";
     }
     // Scorpio - October 23 - November 21
     else if (
-        (month == 10 && day >= 23) ||
-        (month == 11 && day <= 21)
+      (month == 10 && day >= 23) ||
+      (month == 11 && day <= 21)
     ) {
-        return (horoscope = "scorpio");
+      return "Scorpio";
     }
     // Sagittarius - November 22 - December 21
     else if (
-        (month == 11 && day >= 22) ||
-        (month == 12 && day <= 21)
+      (month == 11 && day >= 22) ||
+      (month == 12 && day <= 21)
     ) {
-        return (horoscope = "sagittarius");
+      return "Sagittarius";
     }
   }
 
@@ -161,10 +186,10 @@ $(document).ready(function() {
       type: "POST",
       url: queryURL3,
       dataType: "json"
-    }).then(function(response) {
-    //   console.log(response);
+    }).then(function (response) {
+      //   console.log(response);
       console.log(response.sentiment.type);
-      return response.sentiment.type;  
+      return response.sentiment.type;
     });
   }
 
@@ -185,7 +210,7 @@ $(document).ready(function() {
       type: "POST",
       url: queryURL2,
       dataType: "json"
-    }).then(function(response) {
+    }).then(function (response) {
       //   console.log(response);
       // console.log(reponse.description);
       var arr = response.annotations;
@@ -218,15 +243,15 @@ $(document).ready(function() {
     // var queryURL = "https://cors-anywhere.herokuapp.com/https://sandipbgt.com/theastrologer/api/horoscope/"+horoscope+"/today/"
     // var res;
 
-    var tsign = horoscope.lower()
+    var sign = horoscope.lower()
     var queryURL =
-      "https://aztro.sameerkumar.website?sign=" + tsign + "&day=today";
+      "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
 
     $.ajax({
       type: "POST",
       url: queryURL,
       dataType: "json"
-    }).then(function(response) {
+    }).then(function (response) {
       // options = response.description;
       resp = response.description;
       // console.log(response);
@@ -247,24 +272,24 @@ $(document).ready(function() {
   //test regular Zodiac, should work with any date 
   console.log(getZodiac("1970-01-01"));
   console.log(chineseZodiac("1970-01-01"));
-  
+
   var zodiac = chineseZodiac("1970-01-01");
 
   function getGiphyImages(zodiac) {
 
     // Add image
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + zodiac +"&limit=1&api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + zodiac + "&limit=1&api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4";
 
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
       console.log(response);
 
       var gifs = response.data
       console.log(gifs[0].images.original.url);
-      
+
     });
 
   }
