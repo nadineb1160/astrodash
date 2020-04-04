@@ -42,8 +42,14 @@ h3 {
 }
 
 #natalChart {
-    top: 50px;
+    top: 200px;
     right: 50px;
+}
+
+#natalChartHeading {
+    top: 100px;
+    right: 50px;
+    text-align: center;
 }
 
 .uk-overlay-default {
