@@ -51,6 +51,9 @@ $(document).ready(function () {
     console.log(resp);
     horoscopeSet(resp);
 
+    getGiphyImages(czodiac);
+    getQuotes(keyword);
+
   });
 
   function getZodiac(indate) {
@@ -368,10 +371,10 @@ $(document).ready(function () {
   //  chineseZodiac("1970-01-01");
 
   //test regular Zodiac, should work with any date 
-  console.log(getZodiac("1970-01-01"));
-  console.log(chineseZodiac("1970-01-01"));
+  // console.log(getZodiac("1970-01-01"));
+  // console.log(chineseZodiac("1970-01-01"));
 
-  var zodiac = chineseZodiac("1970-01-01");
+  // var zodiac = chineseZodiac("1970-01-01");
 
   function getGiphyImages(zodiac) {
 
@@ -391,6 +394,5 @@ $(document).ready(function () {
     });
 
   }
-  getGiphyImages(zodiac);
 
 });
