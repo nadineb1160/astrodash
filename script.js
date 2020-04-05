@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     console.log("bday = " + bday);
 
-    // Get Western Zodiac
+    // Get Zodiac
     astrosign = getZodiac(bday);
     console.log("astrosign=" + astrosign);
 
@@ -40,15 +40,17 @@ $(document).ready(function () {
     czodiac = chineseZodiac(bday);
     console.log("czodiac=" + czodiac);
 
+    // Display Zodiac signs
+    $("#horoscopeName").text("Astrological sign " + astrosign);
+    $("#and").attr("style", "display: block");
+    $("#zodiacName").text("Year of the " + czodiac);
+
     getHoroscope(astrosign, getDataBoth);
     // resp now contains the horoscope
     // keyword now has the keyword from horoscope
     // sentiment now has sentiment from horoscope
-    //
-
-    $("#horoscopeName").text("Astrological sign " + astrosign);
-    $("#and").attr("style", "display: block");
-    $("#zodiacName").text("Year of the " + czodiac);
+    $("tileA").text(keyword); // word of day
+    $("tileB").text(resp);  // sentiment
 
     timerSet(date);
     // console.log(resp);
