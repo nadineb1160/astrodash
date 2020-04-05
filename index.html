@@ -17,93 +17,83 @@
 <body>
 
     <!-- Main Image -->
-    <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
+    <div class="uk-container uk-container-large" id="landing">
+        <!-- <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
         style="background-image: url('https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg');"
-        id="background">
+        id="background"> -->
 
         <!-- Logo -->
-        <h1 class="uk-heading-medium uk-padding" id="heading"><a href="index.html">AstroDash</a></h1>
+        <h1 class="uk-heading-medium uk-padding uk-position-top-center" id="heading"><a href="index.html">AstroDash</a></h1>
 
-        <br>
+        <!-- Welcome Message -->
+        <div class="welcomeMessage uk-position-center uk-text-center">
 
-        <!-- Navigation bars -->
-        <div class="uk-padding" id="navbar">
-            <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <li class="uk-active nav">
-                            <!-- Horoscope modal -->
-                            <a href="#modal-example" id="click" uk-toggle>Click for horoscope!</a>
-                        </li>
+            <!-- Welcome Header -->
+            <h2 id="welcomeMessage">Welcome to your Astro Dash!</h2>
 
-                        <!-- Natal chart link -->
-                        <li><a href="natalChart.html" class="nav">Natal Chart</a></li>
+            <!-- Setup Button -->
+            <a href="#modal-example" id="click" uk-toggle>Click for horoscope!</a>
 
+            <!-- Birthday modal -->
+            <div id="modal-example" uk-modal>
+                <div class="uk-modal-dialog" id="bday-form">
 
-                        <!-- Birthday modal -->
-                        <div id="modal-example" uk-modal>
-                            <div class="uk-modal-dialog" id="bday-form">
+                    <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top">
+                        <fieldset class="uk-fieldset">
 
-                                <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top">
-                                    <fieldset class="uk-fieldset">
+                            <legend class="uk-legend">Fill in your infomation to see your dashboard!</legend>
 
-                                        <legend class="uk-legend">Fill in your infomation to see your dashboard!</legend>
+                            <br>
 
-                                        <br>
+                            <!-- Birthday Input -->
+                            <div class="uk-margin uk-width-1-2 uk-display-inline">
+                                <h4>Enter Your Birthday:</h4>
+                                <!-- Month Input -->
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" id="bday-month" placeholder="MM">
+                                </div>
 
-                                        <!-- Birthday Input -->
-                                        <div class="uk-margin uk-width-1-2 uk-display-inline">
-                                            <h4>Enter Your Birthday:</h4>
-                                            <!-- Month Input -->
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" id="bday-month" placeholder="MM">
-                                            </div>
+                                <!-- Day Input -->
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" id="bday-day" placeholder="DD">
+                                </div>
 
-                                            <!-- Day Input -->
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" id="bday-day" placeholder="DD">
-                                            </div>
+                                <!-- Year Input -->
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" id="bday-year" placeholder="YYYY">
+                                </div>
 
-                                            <!-- Year Input -->
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" id="bday-year" placeholder="YYYY">
-                                            </div>
-
-                                        </div>
-
-                                        <hr>
-
-                                        <!-- Location Input -->
-                                        <div class="uk-margin uk-width-1-2 uk-display-inline">
-                                            <h4>Enter Your Current City:</h4>
-                                            <!-- City Input -->
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" id="city" placeholder="San Francisco">
-                                            </div>
-
-                                            <!-- State Input -->
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" id="state" placeholder="California">
-                                            </div>
-
-                                        </div>
-
-                                        <!-- Submit button -->
-                                        <div class="uk-margin-top uk-width-1-2">
-                                            <button class="uk-button uk-button" id="bday-submit">Submit</button>
-                                        </div>
-
-                                    </fieldset>
-                                </form>
                             </div>
-                        </div>
 
-                        <br>
+                            <hr>
 
-                    </ul>
+                            <!-- Location Input -->
+                            <div class="uk-margin uk-width-1-2 uk-display-inline">
+                                <h4>Enter Your Current City:</h4>
+                                <!-- City Input -->
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" id="city" placeholder="San Francisco">
+                                </div>
+
+                                <!-- State Input -->
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" id="state" placeholder="California">
+                                </div>
+
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="uk-margin-top uk-width-1-2">
+                                <button class="uk-button uk-button" id="bday-submit">Submit</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
                 </div>
-            </nav>
+            </div>
+
         </div>
+
 
         <!-- Horoscope Display -->
         <h3 class="uk-heading-medium uk-position-center" id="signs">
@@ -146,7 +136,7 @@
 
     <br>
 
-    <div class="uk-container uk-container-large">
+    <div class="uk-container uk-container-large" id="content">
 
         <!-- Horoscope API Data -->
         <div class="uk-child-width-1-2@m uk-grid-match" id="horoscope-description" uk-grid>
