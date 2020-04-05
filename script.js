@@ -49,15 +49,18 @@ $(document).ready(function () {
     // resp now contains the horoscope
     // keyword now has the keyword from horoscope
     // sentiment now has sentiment from horoscope
-    $("tileA").text(keyword); // word of day
-    $("tileB").text(resp);  // sentiment
+
+    // console.log("keyword: ", keyword);
+    // console.log("resp: ", resp);
+    // $("tileA").text(keyword); // word of day
+    // $("tileB").text(resp);  // sentiment
 
     timerSet(date);
     // console.log(resp);
 
     // getGiphyImages(czodiac);
     // getQuotes(keyword);
-    getTidalInfo(curlat, curlon)
+    // getTidalInfo(curlat, curlon)
 
   });
 
@@ -194,10 +197,13 @@ $(document).ready(function () {
     // 1920 % 12 = 0
   }
 
-  // callback function for horoscope call
+  // Callback function for horoscope call
   function getDataBoth() {
     keyword = getKeyword();
     sentiment = getSentiment();
+    console.log(keyword);
+    console.log(sentiment);
+    wordSet(keyword, sentiment);
   }
 
   function getSentiment() {
@@ -239,8 +245,8 @@ $(document).ready(function () {
       url: queryURL2,
       dataType: "json"
     }).then(function (response) {
-      //   console.log(response);
-      // console.log(reponse.description);
+      console.log(response);
+      console.log(reponse.description);
       var arr = response.annotations;
       // sample reply  arr[x]   (useful spot,title, label)
       // start: 191
@@ -259,7 +265,7 @@ $(document).ready(function () {
       // }
       // random version
       var rand = Math.floor(Math.random() * arr.length);
-      console.log(arr[rand].label);
+      console.log("label", arr[rand].label);
       return arr[rand].label;
       // callback();
     });
@@ -295,14 +301,22 @@ $(document).ready(function () {
 
 
       callback();
-      horoscopeSet(resp);
+      horoscopeSet();
     });
   }
 
   // Set horoscope API info
-  function horoscopeSet(resp) {
+  function horoscopeSet() {
     console.log("resp=" + resp);
     $("#horoscope1").text(resp);
+    
+  }
+
+  function wordSet(word, sentimentOfWord) {
+    console.log("keyword: " + word);
+    console.log("sentiment: " + sentimentOfWord);
+    $("tileA").text(word); // word of day
+    $("tileB").text(sentimentOfWord);  // sentiment
   }
 
   // Date had format YYYY-MM-DD
