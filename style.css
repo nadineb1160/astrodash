@@ -1,41 +1,77 @@
+/* <!-- <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
+style="background-image: url('https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg');"
+id="background"> --> */
+#landing {
+  background: url("https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+/* #content {
+    display: hide;
+} */
+
 body {
-    background-color: black;
+  background-color: black;
 }
 
 .nav {
-    text-align: center;
+  text-align: center;
+}
+
+#welcomeMessage {
+    color: white;
 }
 
 #click {
-    font-size: larger;
-    color: #ffe082;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  border: 5px solid white;
+  padding: 10px;
+  border-radius: 15px;
 }
 
-#heading, #horoscopeName, #zodiacName {
-    font-family: 'Orbitron', sans-serif;
+#heading,
+#horoscopeName,
+#zodiacName, 
+#welcomeMessage {
+  font-family: "Orbitron", sans-serif;
+}
+
+#heading a {
+    color: white;
 }
 
 #signs {
-    text-align: center;
+  text-align: center;
+  color: white;
 }
 
 #bday-countdown {
-    display: none;
-    top: 150px;
+  display: none;
+  top: 50px;
+  color: white;
+  font-size: smaller;
 }
 
 #bday-count-head {
-    text-align: center;
-    font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  color: white;
 }
 
 #background {
-    height: 1000px;
+  height: 1000px;
 }
 
 #bday-form1 {
-    /* margin-top: 200px; */
-    display: none;
+  /* margin-top: 200px; */
+  display: none;
 }
 /* 
 #horoscope-description {
@@ -43,51 +79,51 @@ body {
 } */
 
 #bday-count-head {
-    bottom: 110px;
+  bottom: 110px;
 }
 
 h3 {
-    color:  black;
+  color: black;
 }
 
 #natalChart {
-    top: 200px;
-    right: 50px;
+  top: 200px;
+  right: 50px;
 }
 
 #natalChartHeading {
-    top: 100px;
-    right: 50px;
-    text-align: center;
+  top: 100px;
+  right: 50px;
+  text-align: center;
 }
 
 .uk-overlay-default {
-    width: 100%;
+  width: 100%;
 }
 
-.horoscope1, .horoscope2 {
-    background-color: #fafafa;
+.horoscope1,
+.horoscope2 {
+  background-color: #fafafa;
 }
 
 .tileColor1 {
-    background-color:#ffe0b2;
+  background-color: #ffe0b2;
 }
 
 .tileColor2 {
-    background-color: #ffa726;
-
+  background-color: #ffa726;
 }
 
 .quote1 {
-    background-color:#bbdefb;
+  background-color: #bbdefb;
 }
 .quote2 {
-    background-color:#e6ee9c;
+  background-color: #e6ee9c;
 }
 .quote3 {
-    background-color: #f8bbd0;;
+  background-color: #f8bbd0;
 }
 
 #and {
-    display: none;
+  display: none;
 }
