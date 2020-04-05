@@ -7,6 +7,9 @@ var curlat, curlon; // need it for UV, BreezoMeter, Pollen
 // Once document is loaded
 $(document).ready(function () {
 
+  // Hide Data
+  $("#content").hide();
+
   // var horoscope = "";
 
   // var tsign = "";
@@ -25,6 +28,7 @@ $(document).ready(function () {
 
   // Submit Form
   $("#bday-submit").on("click", function (event) {
+
     // Prevent Default Form Behavior
     event.preventDefault();
 
@@ -51,6 +55,10 @@ $(document).ready(function () {
     czodiac = chineseZodiac(bday);
     console.log("czodiac=" + czodiac);
 
+    // Hide Welcome Message
+    $("#welcomeMessage").hide();
+    $("#click").hide();
+
     // Display Zodiac signs
     $("#horoscopeName").text("Astrological sign " + astrosign);
     $("#and").attr("style", "display: block");
@@ -76,6 +84,10 @@ $(document).ready(function () {
     // Get Location
     city = $("#city").val();
     state = $("#state").val();
+
+    // saveNewData();
+
+    $("#content").show()
 
     // Get Weather
     queryCurrentWeather(city, state, getPollenBrezData);
@@ -106,7 +118,7 @@ $(document).ready(function () {
     // Check Storage For City
     storedCity = localStorage.getItem("city");
     storedState = localStorage.getItem("state");
-    
+
 
     // Stored Bday Exists
     if (storedCity, storedState !== "") {
@@ -115,6 +127,9 @@ $(document).ready(function () {
     }
   }
 
+  // function saveNewData() {
+
+  // }
 
   function getZodiac(indate) {
     var tdate = moment(indate); // any date will be converted
