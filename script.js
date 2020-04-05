@@ -471,14 +471,13 @@ $(document).ready(function () {
       $("#weatherIcon").attr("src", weather.weatherIconUrl);
 
       // Fahrenheit Symbol
-      var fahsymbol = "&deg F";
+      var fahsymbol = "%C2%B0" + "F";
 
       // Temperature
       weather.temperature =
-        Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
-        decodeURIComponent(fahsymbol);
-
-      $("#temperature").text(weather.temperature);
+        Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10;
+        
+      $("#temperature").text(weather.temperature + decodeURIComponent(fahsymbol));
 
       // Humidity
       weather.humidity = res.main.humidity + "%";
