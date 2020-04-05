@@ -53,7 +53,7 @@ $(document).ready(function () {
     $("#and").attr("style", "display: block");
     $("#zodiacName").text("Year of the " + czodiac);
 
-    getHoroscope(astrosign, getDataBoth);
+    getHoroscope(astrosign, getHoroscopeData);
     // resp now contains the horoscope
     // keyword now has the keyword from horoscope
     // sentiment now has sentiment from horoscope
@@ -75,7 +75,7 @@ $(document).ready(function () {
      state = $("#state").val();
 
     // Get Weather
-    queryCurrentWeather(city, state, getDataBoth2);
+    queryCurrentWeather(city, state, getPollenBrezData);
 
   });
 
@@ -214,7 +214,7 @@ $(document).ready(function () {
   }
 
   // Callback function for horoscope call
-  function getDataBoth() {
+  function getHoroscopeData() {
     keyword = getKeyword();
     sentiment = getSentiment();
     console.log(keyword);
@@ -222,9 +222,9 @@ $(document).ready(function () {
     wordSet(keyword, sentiment);
   }
 
-  function getDataBoth2(curlat, curlon) {
-    getBreezometerAQI(curlat, curlon);
-    getPollenForecast(curlat, curlon);
+  function getPollenBrezData(lat, lon) {
+    getBreezometerAQI(lat, lon);
+    getPollenForecast(lat, lon);
   }
 
 
@@ -495,12 +495,31 @@ $(document).ready(function () {
       lat = res.coord.lat;
       lon = res.coord.lon;
 
-      console.log(weather);
-      console.log(lat + " / " + lon);
+      // console.log(weather);
+      // console.log(lat + " / " + lon);
+
+      getUVIndex(lat,lon);
 
       callback(lat, lon);
       return weather;
     });
+  }
+
+
+  function getUVIndex(lat,lon) {
+    var queryUVURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&APPID=d953636a06fd6af8b2c881b86b574429";
+
+        $.ajax({
+            url: queryUVURL,
+            method: "GET"
+        }).then(function (response) {
+            // Retrieve UV index
+            UVIndex = response.value;
+
+            // Display uv
+            $("#uv").text(UVIndex);
+
+        });
   }
 
   function getBreezometerAQI(lat, lon) {
