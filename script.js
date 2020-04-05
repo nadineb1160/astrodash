@@ -127,9 +127,23 @@ $(document).ready(function () {
     }
   }
 
-  // function saveNewData() {
+  function saveNewData() {
+    saveBdayData();
+    saveCityData();
+  }
 
-  // }
+  function saveBdayData() {
+    // Saves Bday Input to LocalStorage
+    localStorage.setItem("day", $("#bday-day").val());
+    localStorage.setItem("month", $("#bday-month").val());
+    localStorage.setItem("year", $("#bday-year").val());
+  }
+
+  function saveCityData() {
+    // Saves City Input to LocalStorage
+    localStorage.setItem("city", $("#city").val());
+    localStorage.setItem("state", $("#state").val());
+  }
 
   function getZodiac(indate) {
     var tdate = moment(indate); // any date will be converted
