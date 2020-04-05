@@ -1,6 +1,9 @@
 // Once document is loaded
 var resp = "";
 var bday, astrosign, czodiac, keyword, sentiment;
+var owmapikey = "8164cdd41308f159d85ff4ef8f3b5171"; // openweathermap.org
+var breezokey = "a7204a3f724a470fb35ad085b72fdba7"; //breezometer.com
+var curlat, curlon; // need it for UV, BreezoMeter, Pollen
 
 $(document).ready(function () {
   var horoscope = "cancer";
@@ -48,11 +51,11 @@ $(document).ready(function () {
     $("#zodiacName").text("Year of the " + czodiac);
 
     timerSet(date);
-    console.log(resp);
-    horoscopeSet(resp);
+    // console.log(resp);
 
-    getGiphyImages(czodiac);
-    getQuotes(keyword);
+    // getGiphyImages(czodiac);
+    // getQuotes(keyword);
+    getTidalInfo(curlat, curlon)
 
   });
 
@@ -290,6 +293,7 @@ $(document).ready(function () {
 
 
       callback();
+      horoscopeSet(resp);
     });
   }
 
@@ -394,5 +398,24 @@ $(document).ready(function () {
     });
 
   }
+
+
+
+  // function getTidalInfo(lat, long) {
+
+  //   var queryURL = "https://suncalc.org/#/48.85826,2.29451,17/2015.05.11/13:15/324.0/2";
+
+  //   $.ajax({
+  //     url: queryURL,
+  //     method: "GET"
+  //   }).then(function (response) {
+  //     console.log(response);
+
+  //     // var gifs = response.data
+  //     // console.log(gifs[0].images.original.url);
+
+  //   });
+
+  // }
 
 });
