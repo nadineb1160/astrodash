@@ -268,7 +268,7 @@ $(document).ready(function () {
       dataType: "json"
     }).then(function (response) {
       console.log(response);
-      console.log(reponse.description);
+      console.log(response.description);
       var arr = response.annotations;
       // sample reply  arr[x]   (useful spot,title, label)
       // start: 191
@@ -456,18 +456,19 @@ $(document).ready(function () {
 
       console.log(res);
 
-      // var curcity = res.name;
-      // $("#curcity").text(res.name);
       weather.cityName = res.name;
-      $("#cityName").text(res.name);
+      // "San Francisco Weather"
+      $("#cityName").text(res.name + " Weather");
 
       // Weather Icon
       var iconId = res.weather[0].icon; // how to convert that to real icon?
-      console.log(iconweatherId);
+      console.log(iconId);
 
       // Icon URL
       weather.weatherIconUrl =
         "http://openweathermap.org/img/wn/" + iconId + "@2x.png";
+
+      $("#weatherIcon").attr("src", weather.weatherIconUrl);
 
       // Fahrenheit Symbol
       var fahsymbol = "&deg F";
@@ -477,7 +478,7 @@ $(document).ready(function () {
         Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
         decodeURIComponent(fahsymbol);
 
-      $(".temperature").text(weather.temperature);
+      $("#temperature").text(weather.temperature);
 
       // Humidity
       weather.humidity = res.main.humidity + "%";
@@ -536,7 +537,7 @@ $(document).ready(function () {
     // see https://docs.breezometer.com/api-documentation/pollen-api/v2/#request-parameters
 
     var thtml = "";
-    var querypPollenURL =
+    var queryPollenURL =
       "https://api.breezometer.com/pollen/v2/forecast/daily?lat=" +
       lat +
       "&lon=" +
