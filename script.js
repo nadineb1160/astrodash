@@ -6,7 +6,7 @@ var curlat, curlon; // need it for UV, BreezoMeter, Pollen
 
 // Once document is loaded
 $(document).ready(function () {
-  
+
   // var horoscope = "";
 
   // var tsign = "";
@@ -19,7 +19,10 @@ $(document).ready(function () {
 
   // Variables for location
   var city, state;
-  
+
+  // Get previous data
+  getPrevData();
+
   // Submit Form
   $("#bday-submit").on("click", function (event) {
     // Prevent Default Form Behavior
@@ -70,14 +73,47 @@ $(document).ready(function () {
     // getQuotes(keyword);
     // getTidalInfo(curlat, curlon)
 
-     // Get Location
-     city = $("#city").val();
-     state = $("#state").val();
+    // Get Location
+    city = $("#city").val();
+    state = $("#state").val();
 
     // Get Weather
     queryCurrentWeather(city, state, getPollenBrezData);
 
   });
+
+  // Get Previous Bday and City
+  function getPrevData() {
+    getBday();
+    getCity();
+  }
+
+  function getBday() {
+    // Check Storage For Bday
+    storedYear = localStorage.getItem("year");
+    storedMonth = localStorage.getItem("month");
+    storedDay = localStorage.getItem("day");
+
+    // Stored Bday Exists
+    if (storedYear, storedMonth, storedDay !== "") {
+      year = storedYear;
+      month = storedMonth;
+      day = storedDay;
+    }
+  }
+
+  function getCity() {
+    // Check Storage For City
+    storedCity = localStorage.getItem("city");
+    storedState = localStorage.getItem("state");
+    
+
+    // Stored Bday Exists
+    if (storedCity, storedState !== "") {
+      city = storedCity;
+      state = storedState;
+    }
+  }
 
 
   function getZodiac(indate) {
@@ -476,7 +512,7 @@ $(document).ready(function () {
       // Temperature
       weather.temperature =
         Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10;
-        
+
       $("#temperature").text(weather.temperature + decodeURIComponent(fahsymbol));
 
       // Humidity
@@ -498,7 +534,7 @@ $(document).ready(function () {
       // console.log(weather);
       // console.log(lat + " / " + lon);
 
-      getUVIndex(lat,lon);
+      getUVIndex(lat, lon);
 
       callback(lat, lon);
       return weather;
@@ -506,20 +542,20 @@ $(document).ready(function () {
   }
 
 
-  function getUVIndex(lat,lon) {
+  function getUVIndex(lat, lon) {
     var queryUVURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&APPID=d953636a06fd6af8b2c881b86b574429";
 
-        $.ajax({
-            url: queryUVURL,
-            method: "GET"
-        }).then(function (response) {
-            // Retrieve UV index
-            UVIndex = response.value;
+    $.ajax({
+      url: queryUVURL,
+      method: "GET"
+    }).then(function (response) {
+      // Retrieve UV index
+      UVIndex = response.value;
 
-            // Display uv
-            $("#uv").text(UVIndex);
+      // Display uv
+      $("#uv").text(UVIndex);
 
-        });
+    });
   }
 
   function getBreezometerAQI(lat, lon) {
