@@ -396,6 +396,194 @@ $(document).ready(function () {
 
   // var zodiac = chineseZodiac("1970-01-01");
 
+  function kelvinToFahrenheit(kelvin) {
+    return (kelvin - 273.15) * 1.8 + 32;
+  }
+
+  function queryCurrentWeather(inCity, inState, callback) {
+    console.log(inCity);
+
+    var retWeather = {
+      cityName: "",
+      curDate: "",
+      iconWeatherUrl: "",
+      curHumid: "",
+      curTemp: "",
+      curWind: "",
+    };
+
+    var queryurl1 =
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      encodeURI(inCity) +
+      "," +
+      encodeURI(inState) +
+      "&appid=" +
+      owmapikey;
+
+    // perform AJAX query here
+    console.log(queryurl1);
+
+    $.ajax({
+      url: queryurl1,
+      method: "GET",
+    }).then(function (response) {
+      res = response;
+
+      console.log(res);
+
+      // var curcity = res.name;
+      // $("#curcity").text(res.name);
+      retWeather.cityName = res.name;
+      $("h2#modal5").text(res.name);
+
+      var curdate = new Date(res.dt * 1000);
+      console.log(curdate);
+      // $("#curdate").text(curdate.toLocaleDateString("en-US"));
+      retWeather.curDate = curdate.toLocaleDateString("en-US");
+      var thtml = "<h2>" + curdate.toLocaleDateString("en-US") + "</h2>";
+
+      var iconweather = res.weather[0].icon; // how to convert that to real icon?
+      console.log(iconweather);
+      // $("#iconweather").html(
+      //   "<img src='http://openweathermap.org/img/wn/" +
+      //     iconweather +
+      //     "@2x.png' />"
+      // );
+      retWeather.iconWeatherUrl =
+        "http://openweathermap.org/img/wn/" + iconweather + "@2x.png";
+
+      thtml +=
+        "<P><img src='http://openweathermap.org/img/wn/" +
+        iconweather +
+        "@2x.png' /></P>";
+
+      // var curtemp = res.main.temp; // convert from kelvin
+      var fahsymbol = "&deg F";
+      // $("#curtemp").html(
+      // Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
+      // decodeURIComponent(fahsymbol)
+      // );
+      retWeather.curTemp =
+        Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
+        decodeURIComponent(fahsymbol);
+
+      thtml +=
+        "<P>" +
+        Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
+        decodeURIComponent(fahsymbol) +
+        "</P>";
+
+      // var curhumid = res.main.humidity; // add percentage sign
+      // $("#curhumid").text(res.main.humidity + "%");
+      retWeather.curHumid = res.main.humidity + "%";
+
+      thtml += "<p>" + res.main.humidity + "%" + "</p>";
+
+      // var curwind = res.wind.speed; // velocity only?
+      // $("#curwind").text(Math.round(res.wind.speed * 10) / 10 + " MPH");
+      retWeather.curWind = Math.round(res.wind.speed * 10) / 10 + " MPH";
+
+      thtml += "<p>" + Math.round(res.wind.speed * 10) / 10 + " MPH</p>";
+      // set the cell text
+
+      // we're recording the lat-lon for the UV reading
+      $("#app5").html(thtml);
+
+      curlat = res.coord.lat;
+      curlon = res.coord.lon;
+
+      console.log(retWeather);
+      console.log(curlat + " / " + curlon);
+
+      callback(curlat, curlon);
+      return retWeather;
+    });
+  }
+
+  function getBreezometerAQI(curlat, curlon) {
+    // see https://docs.breezometer.com/api-documentation/air-quality-api/v2/#current-conditions
+
+    var queryURLb =
+      "https://api.breezometer.com/air-quality/v2/current-conditions?lat=" +
+      curlat +
+      "&lon=" +
+      curlon +
+      "&key=" +
+      breezokey;
+
+    console.log(queryURLb);
+    $.ajax({
+      type: "GET",
+      url: queryURLb,
+      dataType: "json",
+    }).then(function (response) {
+      // options = response.description;
+      resp = response.data.indexes.baqi.aqi;
+      console.log(resp);
+
+      $("h2#modal6").text("Your local Air Quality Index");
+      $("#app6").text(resp);
+
+      return resp;
+      // callback();
+    });
+  }
+
+  function getPollenForecast(curlat, curlon) {
+    // see https://docs.breezometer.com/api-documentation/pollen-api/v2/#request-parameters
+
+    var thtml = "";
+    var queryURLb =
+      "https://api.breezometer.com/pollen/v2/forecast/daily?lat=" +
+      curlat +
+      "&lon=" +
+      curlon +
+      "&days=1" +
+      "&key=" +
+      breezokey;
+
+    console.log(queryURLb);
+    $.ajax({
+      type: "GET",
+      url: queryURLb,
+      dataType: "json",
+    }).then(function (response) {
+      // options = response.description;
+      console.log(response);
+      resp = response.data[0].types;
+      console.log(resp);
+
+      $("h2#modal7").text("Your local pollen data");
+
+      try {
+        txt = "<P>Grass pollen data = " + resp.grass.index.value + "</P>";
+        thtml += txt;
+        console.log(thtml);
+      } catch (err) {
+        console.log("no grass pollen info / " + thtml);
+      }
+
+      try {
+        txt = "<P>Tree pollen data = " + resp.tree.index.value + "</P>";
+        thtml += txt;
+        console.log(thtml);
+      } catch (err) {
+        console.log("no tree pollen info / " + thtml);
+      }
+
+      try {
+        txt = "<P>Weed pollen data = " + resp.weed.index.value + "</P>";
+        thtml += txt;
+        console.log(thtml);
+      } catch (err) {
+        console.log("no weed pollen info / " + thtml);
+      }
+      $("#app7").html(thtml);
+      return resp;
+      // callback();
+    });
+  }
+
   function getGiphyImages(zodiac) {
 
     // Add image
