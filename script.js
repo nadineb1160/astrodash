@@ -1,23 +1,31 @@
-// Once document is loaded
 var resp = "";
 var bday, astrosign, czodiac, keyword, sentiment;
 var owmapikey = "8164cdd41308f159d85ff4ef8f3b5171"; // openweathermap.org
 var breezokey = "a7204a3f724a470fb35ad085b72fdba7"; //breezometer.com
 var curlat, curlon; // need it for UV, BreezoMeter, Pollen
 
+// Once document is loaded
 $(document).ready(function () {
-  var horoscope = "cancer";
+  
+  // var horoscope = "";
 
-  var tsign = "";
+  // var tsign = "";
 
-  // Variables for API search
+  // Variables for horoscope API search
   var compatibility, mood, color, lucky_num, lucky_time;
 
+  // Variable for birthday
   var month, day, year, date;
 
+  // Variables for location
+  var city, state;
+  
+  // Submit Form
   $("#bday-submit").on("click", function (event) {
+    // Prevent Default Form Behavior
     event.preventDefault();
 
+    // Get Birthday Date
     month = $("#bday-month").val();
     day = $("#bday-day").val();
     year = $("#bday-year").val();
@@ -62,7 +70,15 @@ $(document).ready(function () {
     // getQuotes(keyword);
     // getTidalInfo(curlat, curlon)
 
+     // Get Location
+     city = $("#city").val();
+     state = $("#state").val();
+
+    // Get Weather
+    queryCurrentWeather(city, state, getDataBoth2);
+
   });
+
 
   function getZodiac(indate) {
     var tdate = moment(indate); // any date will be converted
@@ -205,6 +221,12 @@ $(document).ready(function () {
     console.log(sentiment);
     wordSet(keyword, sentiment);
   }
+
+  function getDataBoth2(curlat, curlon) {
+    getBreezometerAQI(curlat, curlon);
+    getPollenForecast(curlat, curlon);
+  }
+
 
   function getSentiment() {
     console.log("resp2 = " + resp);
