@@ -309,7 +309,7 @@ $(document).ready(function () {
   function horoscopeSet() {
     console.log("resp=" + resp);
     $("#horoscope1").text(resp);
-    
+
   }
 
   function wordSet(word, sentimentOfWord) {
@@ -396,20 +396,23 @@ $(document).ready(function () {
 
   // var zodiac = chineseZodiac("1970-01-01");
 
+
+  // Kelvin to Fahrenheit
   function kelvinToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 1.8 + 32;
   }
 
+  // Get Weather Data
   function queryCurrentWeather(inCity, inState, callback) {
     console.log(inCity);
 
-    var retWeather = {
+    var weather = {
       cityName: "",
       curDate: "",
-      iconWeatherUrl: "",
-      curHumid: "",
-      curTemp: "",
-      curWind: "",
+      weatherIconUrl: "",
+      humidity: "",
+      temperature: "",
+      wind: "",
     };
 
     var queryurl1 =
@@ -433,88 +436,66 @@ $(document).ready(function () {
 
       // var curcity = res.name;
       // $("#curcity").text(res.name);
-      retWeather.cityName = res.name;
-      $("h2#modal5").text(res.name);
+      weather.cityName = res.name;
+      $("#cityName").text(res.name);
 
-      var curdate = new Date(res.dt * 1000);
-      console.log(curdate);
-      // $("#curdate").text(curdate.toLocaleDateString("en-US"));
-      retWeather.curDate = curdate.toLocaleDateString("en-US");
-      var thtml = "<h2>" + curdate.toLocaleDateString("en-US") + "</h2>";
+      // Weather Icon
+      var iconId = res.weather[0].icon; // how to convert that to real icon?
+      console.log(iconweatherId);
 
-      var iconweather = res.weather[0].icon; // how to convert that to real icon?
-      console.log(iconweather);
-      // $("#iconweather").html(
-      //   "<img src='http://openweathermap.org/img/wn/" +
-      //     iconweather +
-      //     "@2x.png' />"
-      // );
-      retWeather.iconWeatherUrl =
-        "http://openweathermap.org/img/wn/" + iconweather + "@2x.png";
+      // Icon URL
+      weather.weatherIconUrl =
+        "http://openweathermap.org/img/wn/" + iconId + "@2x.png";
 
-      thtml +=
-        "<P><img src='http://openweathermap.org/img/wn/" +
-        iconweather +
-        "@2x.png' /></P>";
-
-      // var curtemp = res.main.temp; // convert from kelvin
+      // Fahrenheit Symbol
       var fahsymbol = "&deg F";
-      // $("#curtemp").html(
-      // Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
-      // decodeURIComponent(fahsymbol)
-      // );
-      retWeather.curTemp =
+
+      // Temperature
+      weather.temperature =
         Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
         decodeURIComponent(fahsymbol);
 
-      thtml +=
-        "<P>" +
-        Math.round(kelvinToFahrenheit(res.main.temp) * 10) / 10 +
-        decodeURIComponent(fahsymbol) +
-        "</P>";
+      $(".temperature").text(weather.temperature);
 
-      // var curhumid = res.main.humidity; // add percentage sign
-      // $("#curhumid").text(res.main.humidity + "%");
-      retWeather.curHumid = res.main.humidity + "%";
+      // Humidity
+      weather.humidity = res.main.humidity + "%";
 
-      thtml += "<p>" + res.main.humidity + "%" + "</p>";
+      $("#humidity").text(weather.humidity);
 
-      // var curwind = res.wind.speed; // velocity only?
-      // $("#curwind").text(Math.round(res.wind.speed * 10) / 10 + " MPH");
-      retWeather.curWind = Math.round(res.wind.speed * 10) / 10 + " MPH";
+      // Wind Speed
+      weather.wind = Math.round(res.wind.speed * 10) / 10 + " MPH";
 
-      thtml += "<p>" + Math.round(res.wind.speed * 10) / 10 + " MPH</p>";
-      // set the cell text
+      $("#wind").text(weather.wind);
 
       // we're recording the lat-lon for the UV reading
-      $("#app5").html(thtml);
+      // $("#weather").html(thtml);
 
-      curlat = res.coord.lat;
-      curlon = res.coord.lon;
+      lat = res.coord.lat;
+      lon = res.coord.lon;
 
-      console.log(retWeather);
-      console.log(curlat + " / " + curlon);
+      console.log(weather);
+      console.log(lat + " / " + lon);
 
-      callback(curlat, curlon);
-      return retWeather;
+      callback(lat, lon);
+      return weather;
     });
   }
 
-  function getBreezometerAQI(curlat, curlon) {
+  function getBreezometerAQI(lat, lon) {
     // see https://docs.breezometer.com/api-documentation/air-quality-api/v2/#current-conditions
 
-    var queryURLb =
+    var queryBreezeURL =
       "https://api.breezometer.com/air-quality/v2/current-conditions?lat=" +
-      curlat +
+      lat +
       "&lon=" +
-      curlon +
+      lon +
       "&key=" +
       breezokey;
 
-    console.log(queryURLb);
+    console.log(queryBreezeURL);
     $.ajax({
       type: "GET",
-      url: queryURLb,
+      url: queryBreezeURL,
       dataType: "json",
     }).then(function (response) {
       // options = response.description;
@@ -529,31 +510,29 @@ $(document).ready(function () {
     });
   }
 
-  function getPollenForecast(curlat, curlon) {
+  function getPollenForecast(lat, lon) {
     // see https://docs.breezometer.com/api-documentation/pollen-api/v2/#request-parameters
 
     var thtml = "";
-    var queryURLb =
+    var querypPollenURL =
       "https://api.breezometer.com/pollen/v2/forecast/daily?lat=" +
-      curlat +
+      lat +
       "&lon=" +
-      curlon +
+      lon +
       "&days=1" +
       "&key=" +
       breezokey;
 
-    console.log(queryURLb);
+    console.log(queryPollenURL);
     $.ajax({
       type: "GET",
-      url: queryURLb,
+      url: queryPollenURL,
       dataType: "json",
     }).then(function (response) {
       // options = response.description;
       console.log(response);
       resp = response.data[0].types;
       console.log(resp);
-
-      $("h2#modal7").text("Your local pollen data");
 
       try {
         txt = "<P>Grass pollen data = " + resp.grass.index.value + "</P>";
@@ -578,7 +557,7 @@ $(document).ready(function () {
       } catch (err) {
         console.log("no weed pollen info / " + thtml);
       }
-      $("#app7").html(thtml);
+      $("#pollenData").html(thtml);
       return resp;
       // callback();
     });
