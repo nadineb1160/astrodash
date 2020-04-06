@@ -36,10 +36,10 @@
         <div class="welcomeMessage uk-position-center uk-text-center">
 
             <!-- Welcome Header -->
-            <h2 id="welcomeMessage">Welcome to your Astro Dash!</h2>
+            <h2 id="welcomeMessage">Look to the stars</h2>
 
             <!-- Setup Button -->
-            <a href="#modal-example" id="click" uk-toggle>Click for horoscope!</a>
+            <a href="#modal-example" id="click" uk-toggle>Click for your horoscope!</a>
 
             <!-- Birthday modal -->
             <div id="modal-example" uk-modal>
@@ -100,26 +100,26 @@
             </div>
 
         </div>
+<!-- 
 
-
-        <!-- Horoscope Display -->
+        Horoscope Display
         <h3 class="uk-heading-medium uk-position-center" id="signs">
 
-            <!-- Horoscope Name -->
+            Horoscope Name
             <p id="horoscopeName"></p>
 
             <p id="and">&</p>
 
-            <!-- Chinese Zodiac Name -->
+            Chinese Zodiac Name
             <p id="zodiacName"></p>
-        </h3>
+        </h3> -->
 
 
         <!-- Birthday Countdown -->
-        <div class="uk-position-small uk-position-top-right uk-height-small uk-padding" uk-grid
+        <div class="uk-position-center uk-padding"
             uk-countdown="date: 2020-04-08T00:00:00+00:00" id="bday-countdown">
 
-            <h3 class="uk-position-bottom-right" id="bday-count-head">Birthday countdown:</h3>
+            <h3 id="bday-count-head">Birthday Countdown:</h3>
 
             <div>
                 <div class="uk-countdown-number uk-countdown-days"></div>
@@ -151,6 +151,18 @@
     <br>
 
     <div class="uk-container uk-container-large uk-margin" id="content">
+
+        <!-- Horoscope Display -->
+        <h3 class="uk-heading-medium" id="signs">
+
+            <!-- Horoscope Name -->
+            <p id="horoscopeName"></p>
+
+            <!-- <p id="and">&</p> -->
+
+            <!-- Chinese Zodiac Name -->
+            <!-- <p id="zodiacName"></p> -->
+        </h3>
 
         <!-- Horoscope1 API Data -->
         <div class="uk-child-width-1-2@m uk-grid-match" id="horoscope-description" uk-grid>
