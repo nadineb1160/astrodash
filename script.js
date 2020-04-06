@@ -775,24 +775,24 @@ $(document).ready(function () {
     });
   }
 
-  function getGiphyImages(zodiac) {
+  // function getGiphyImages(zodiac) {
 
-    // Add image
+  //   // Add image
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + zodiac + "&limit=1&api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4";
+  //   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + zodiac + "&limit=1&api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4";
 
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (response) {
-      console.log(response);
+  //   $.ajax({
+  //     url: queryURL,
+  //     method: "GET"
+  //   }).then(function (response) {
+  //     console.log(response);
 
-      var gifs = response.data
-      console.log(gifs[0].images.original.url);
+  //     var gifs = response.data
+  //     console.log(gifs[0].images.original.url);
 
-    });
+  //   });
 
-  }
+  // }
 
 
 
