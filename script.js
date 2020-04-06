@@ -1,5 +1,5 @@
 var resp = "";
-var bday, astrosign, czodiac, keyword, sentiment;
+var bday, astrosign, czodiac;
 var owmapikey = "8164cdd41308f159d85ff4ef8f3b5171"; // openweathermap.org
 var breezokey = "a7204a3f724a470fb35ad085b72fdba7"; //breezometer.com
 var curlat, curlon; // need it for UV, BreezoMeter, Pollen
@@ -17,8 +17,14 @@ $(document).ready(function () {
   // Variables for Horoscope text
   var horoscope1, horoscope2;
 
-  // Variables for horoscope API search
+  // Variable for sentiment
+  var keyword1, sentiment1, keyword2, sentiment2;
+
+  // Variables for horoscope1 API search
   var compatibility, mood, color, lucky_num, lucky_time;
+
+  // Variable for horoscope2 API search
+  var intensity, mood2, keywordsHoro, intensity;
 
   // Variable for birthday
   var month, day, year, date;
@@ -69,7 +75,7 @@ $(document).ready(function () {
 
     getHoroscope1(astrosign, getHoroscopeData1);
 
-    getHoroscope2(astrosign, getHoroscopeData2);
+    // getHoroscope2(astrosign, getHoroscopeData2);
 
     // console.log("keyword: ", keyword);
     // console.log("resp: ", resp);
@@ -279,19 +285,23 @@ $(document).ready(function () {
 
   // Callback function for horoscope call
   function getHoroscopeData1() {
-    keyword = getKeyword(horoscope1);
-    sentiment = getSentiment(horoscope1);
-    console.log("key1= " + keyword);
-    console.log("sent1= " + sentiment);
-    wordSet1(keyword, sentiment);
+
+    sentiment1 = getSentiment(horoscope1);
+    
+    keyword1 = getKeyword(horoscope1, wordSet1(keyword1, sentiment1));
+    
+    // wordSet1(keyword1, sentiment1);
+
+    getHoroscope2(astrosign, getHoroscopeData2);
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
-    keyword = getKeyword(horoscope2);
-    sentiment = getSentiment(horoscope2);
-    console.log("key2= " + keyword);
-    console.log("sent2= " + sentiment);
-    wordSet2(keyword, sentiment);
+
+    sentiment2 = getSentiment(horoscope2);
+
+    keyword1 = getKeyword(horoscope2, wordSet2(keyword2, sentiment2));
+    
+    // wordSet2(keyword2, sentiment2);
   }
 
   function getPollenBrezData(lat, lon) {
@@ -314,13 +324,16 @@ $(document).ready(function () {
       url: querySentimentURL,
       dataType: "json"
     }).then(function (response) {
+      console.log("hi");
       //   console.log(response);
+      var sentiment = response.sentiment.type
       console.log("sentType = " + response.sentiment.type);
-      return response.sentiment.type;
+
+      return sentiment
     });
   }
 
-  function getKeyword(horoscope) {
+  function getKeyword(horoscope, callback) {
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryKeywordURL =
@@ -336,8 +349,8 @@ $(document).ready(function () {
       url: queryKeywordURL,
       dataType: "json"
     }).then(function (response) {
-      // console.log(response);
-      // console.log(response.description);
+      console.log("resp:")
+      console.log(response);
       var arr = response.annotations;
       // sample reply  arr[x]   (useful spot,title, label)
       // start: 191
@@ -357,16 +370,15 @@ $(document).ready(function () {
       // random version
       var rand = Math.floor(Math.random() * arr.length);
       console.log("label", arr[rand].label);
-      return arr[rand].label;
-      // callback();
+
+      var keyword = arr[rand].label;
+
+      return keyword;
+      callback();
     });
   }
 
   function getHoroscope1(horoscope, callback) {
-    // var queryURL = "https://ohmanda.com/api/horoscope/" + horoscope + "/";
-
-    // var queryURL = "https://cors-anywhere.herokuapp.com/https://sandipbgt.com/theastrologer/api/horoscope/"+horoscope+"/today/"
-    // var res;
 
     var sign = horoscope.toLowerCase();
     var queryHoro1URL = "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
@@ -376,7 +388,7 @@ $(document).ready(function () {
       url: queryHoro1URL,
       dataType: "json"
     }).then(function (response) {
-      // options = response.description;
+      
       horoscope1 = response.description;
       console.log(response);
       // console.log(response.description);
@@ -388,8 +400,13 @@ $(document).ready(function () {
       color = response.color;
       lucky_num = response.lucky_number;
       lucky_time = response.lucky_time;
+      console.log(compatibility);
+      console.log(mood);
+      console.log(color);
+      console.log(lucky_num);
+      console.log(lucky_time);
 
-
+      console.log("HOROSCOPE " + horoscope1);
       callback();
       horoscope1Set(horoscope1);
 
@@ -418,7 +435,11 @@ $(document).ready(function () {
       // console.log(reponse.description);
 
       horoscope2 = response.horoscope;
+      mood2 = response.meta.mood;
+      keywordsHoro = response.meta.keywords;
+      intensity = response.meta.intensity;
       callback();
+      // horoscope2Set(horoscope2);
       horoscope2Set(horoscope2);
     });
 
@@ -428,6 +449,9 @@ $(document).ready(function () {
   function horoscope1Set(horoscope1) {
     console.log("horoscope1 = " + horoscope1);
     $("#horoscope1").text(horoscope1);
+
+    // Get Horoscope 2 
+    getHoroscope2(astrosign, getHoroscopeData2);
   }
 
   // Set horoscope API info
@@ -440,15 +464,15 @@ $(document).ready(function () {
   function wordSet1(word, sentimentOfWord) {
     console.log("keyword: " + word);
     console.log("sentiment: " + sentimentOfWord);
-    $("tileA").text(word); // word of day
-    $("tileB").text(sentimentOfWord);  // sentiment
+    $(".tileA").text(word); // word of day
+    $(".tileB").text(sentimentOfWord);  // sentiment
   }
 
   function wordSet2(word, sentimentOfWord) {
     console.log("keyword: " + word);
     console.log("sentiment: " + sentimentOfWord);
-    $("tileC").text(word); // word of day
-    $("tileD").text(sentimentOfWord);  // sentiment
+    $(".tileC").text(word); // word of day
+    $(".tileD").text(sentimentOfWord);  // sentiment
   }
 
   // Date had format YYYY-MM-DD
