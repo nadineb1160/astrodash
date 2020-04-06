@@ -70,7 +70,7 @@ $(document).ready(function () {
     getHoroscope1(astrosign, getHoroscopeData1);
 
     getHoroscope2(astrosign, getHoroscopeData2);
-  
+
     // console.log("keyword: ", keyword);
     // console.log("resp: ", resp);
     // $("tileA").text(keyword); // word of day
@@ -290,7 +290,7 @@ $(document).ready(function () {
     keyword = getKeyword(horoscope2);
     sentiment = getSentiment(horoscope2);
     console.log("key2= " + keyword);
-    console.log("sent2= " +sentiment);
+    console.log("sent2= " + sentiment);
     wordSet2(keyword, sentiment);
   }
 
@@ -308,7 +308,7 @@ $(document).ready(function () {
       encodeURI(horoscope) +
       "&token=" +
       token;
-    
+
     $.ajax({
       type: "POST",
       url: querySentimentURL,
@@ -675,13 +675,24 @@ $(document).ready(function () {
       console.log(resp);
 
       try {
-        txt = "<P>Grass pollen data = " + resp.grass.index.value + "</P>";
+        // Check Out of Season
+        if (!resp.grass.in_season) {
+          resp.grass.index.value = "Out of season";
+          resp.grass.index.category = "";
+        }
+
+        txt = "<P>Grass pollen data = " + resp.grass.index.value + " " + resp.grass.index.category + "</P>";
         thtml += txt;
       } catch (err) {
         console.log("no grass pollen info / " + thtml);
       }
 
       try {
+        // Check Out of Season
+        if (!resp.tree.in_season) {
+          resp.tree.index.value = "Out of season";
+          resp.tree.index.category = "";
+        }
         txt = "<P>Tree pollen data = " + resp.tree.index.value + "</P>";
         thtml += txt;
       } catch (err) {
@@ -689,6 +700,11 @@ $(document).ready(function () {
       }
 
       try {
+        // Check Out of Season
+        if (!resp.weed.in_season) {
+          resp.weed.index.value = "Out of season";
+          resp.weed.index.category = "";
+        }
         txt = "<P>Weed pollen data = " + resp.weed.index.value + "</P>";
         thtml += txt;
       } catch (err) {
