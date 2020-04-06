@@ -87,6 +87,12 @@ html {
   bottom: 110px;
 }
 
+#scroll {
+    display: none;
+    font-size: 20px;
+    color: white;
+}
+
 h3 {
   color: black;
 }
