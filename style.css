@@ -34,7 +34,7 @@ html {
   font-size: larger;
   background-color: black;
   color: white;
-  border: 5px solid #4db6ac;
+  border: 5px solid#ff4081;
   padding: 10px;
   border-radius: 15px;
 }
@@ -149,7 +149,7 @@ h3 {
 }
 
 .quote1 {
-  background-color: #bbdefb;
+  background-color: #4db6ac;
 }
 .quote2 {
   background-color: #e6ee9c;
