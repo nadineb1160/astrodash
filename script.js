@@ -14,6 +14,9 @@ $(document).ready(function () {
 
   // var tsign = "";
 
+  // Variables for Horoscope text
+  var horoscope1, horoscope2;
+
   // Variables for horoscope API search
   var compatibility, mood, color, lucky_num, lucky_time;
 
@@ -374,8 +377,7 @@ $(document).ready(function () {
       dataType: "json"
     }).then(function (response) {
       // options = response.description;
-      resp = response.description;
-      console.log(resp);
+      horoscope1 = response.description;
       console.log(response);
       // console.log(response.description);
       // console.log("options="+options)
@@ -389,16 +391,51 @@ $(document).ready(function () {
 
 
       callback();
-      horoscopeSet();
+      horoscope1Set(horoscope1);
+
+      getHoroscope2(sign);
     });
   }
 
-  // Set horoscope API info
-  function horoscopeSet() {
-    console.log("resp=" + resp);
-    $("#horoscope1").text(resp);
+  // Get Horoscope 2
+  function getHoroscope2(horoscope) {
+
+    var sign = horoscope.toLowerCase();
+
+    var queryURL2 = "https://cors-anywhere.herokuapp.com/http://sandipbgt.com/theastrologer/api/horoscope/" + sign + "/today/";
+    $.ajax({
+      // headers: {
+      //     "Access-Control-Allow-Origin": "*",
+      //     "Content-Type": "application/json"
+      //   },
+      // type: 'POST',
+      url: queryURL2,
+      method: "GET",
+      dataType: "json"
+    }).then(function (response) {
+      console.log(response);
+      // console.log("hello");
+      // console.log(reponse.description);
+
+      horoscope2 = response.horoscope;
+
+      horoscope2Set(horoscope2);
+    });
 
   }
+
+  // Set horoscope API info
+  function horoscope1Set(horoscope1) {
+    console.log("horoscope1 = " + horoscope1);
+    $("#horoscope1").text(horoscope1);
+  }
+
+  // Set horoscope API info
+  function horoscope2Set(horoscope2) {
+    console.log("horoscope2 = " + horoscope2);
+    $("#horoscope2").text(horoscope2);
+  }
+
 
   function wordSet(word, sentimentOfWord) {
     console.log("keyword: " + word);
