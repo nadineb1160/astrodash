@@ -133,6 +133,13 @@ h3 {
   text-align: center;
 }
 
+.horoscope1Stats,
+.horoscope2Stats {
+  background-color: #fafafa;
+  border-radius: 15px;
+  text-align: center;
+}
+
 .tileColor1 {
   background-color: #ffe0b2;
 }
