@@ -53,6 +53,10 @@ html {
   font-size: 40px;
 }
 
+.uk-position-medium {
+    margin: 0px;
+}
+
 #bday-countdown {
   display: none;
   top: 120px;
