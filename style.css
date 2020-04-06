@@ -24,54 +24,64 @@ html {
 }
 
 #welcomeMessage {
-    color: white;
+  color: black;
+  /* background-color: black; */
+  /* padding: 10px; */
+  /* border-radius: 15px; */
 }
 
 #click {
   font-size: larger;
   background-color: black;
   color: white;
-  border: 5px solid white;
+  border: 5px solid #4db6ac;
   padding: 10px;
   border-radius: 15px;
 }
 
 #heading,
 #horoscopeName,
-#zodiacName, 
+#zodiacName,
 #welcomeMessage {
   font-family: "Orbitron", sans-serif;
 }
 
 #heading a {
-    color: white;
+  color: white;
 }
 
 #signs {
   text-align: center;
   color: white;
+  background-color: #ff4081;
   font-size: 40px;
+  padding: 10px;
+  margin: 20px 0 20px 0;
+  border-radius: 15px;
 }
 
 .uk-position-medium {
-    margin: 0px;
+  margin: 0px;
 }
 
 #bday-countdown {
   display: none;
-  top: 120px;
+  top: 325px;
   color: white;
   text-align: center;
 }
 
 .uk-countdown-number {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 #bday-count-head {
   text-align: center;
   font-family: "Orbitron", sans-serif;
-  color: white;
+  color: #ff4081;
+  background-color: black;
+  padding: 10px;
+  border-radius: 15px;
 }
 
 #background {
@@ -92,9 +102,9 @@ html {
 }
 
 #scroll {
-    display: none;
-    font-size: 20px;
-    color: white;
+  display: none;
+  font-size: 20px;
+  color: white;
 }
 
 h3 {
