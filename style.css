@@ -115,6 +115,8 @@ h3 {
 .horoscope1,
 .horoscope2 {
   background-color: #fafafa;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .tileColor1 {
