@@ -1,28 +1,16 @@
 // Photos for Horoscope
 var horoscopePic = {
-  // Capricorn
   CapricornIcon: "https://cdn.pixabay.com/photo/2017/07/29/18/41/capricorn-2552366__340.png",
-  // Aquarius
   AquariusIcon: "https://cdn.pixabay.com/photo/2017/07/29/13/24/aquarius-2551502__340.png",
-  // Pisces
   PiscesIcon: "https://cdn.pixabay.com/photo/2017/07/29/15/56/pisces-2551918__340.png",
-  // Aries
   AriesIcon: "https://cdn.pixabay.com/photo/2017/07/28/22/02/aries-2549974__340.png",
-  // Taurus
   TaurusIcon: "https://cdn.pixabay.com/photo/2017/07/28/22/46/taurus-2550112__340.png",
-  // Gemini
   GeminiIcon: "https://cdn.pixabay.com/photo/2017/07/28/23/22/gemini-2550197__340.png",
-  // Cancer
   CancerIcon: "https://cdn.pixabay.com/photo/2017/07/29/13/07/cancer-2551431__340.png",
-  // Leo
   LeoIcon: "https://cdn.pixabay.com/photo/2017/07/29/12/19/leo-2551352__340.png",
-  // Virgo
   VirgoIcon: "https://cdn.pixabay.com/photo/2017/07/29/18/09/virgo-2552259_960_720.png",
-  // Libra
   LibraIcon: "https://cdn.pixabay.com/photo/2017/07/29/19/42/libra-2552502__340.png",
-  // Scorpio
   ScorpioIcon: "https://cdn.pixabay.com/photo/2017/07/29/16/44/scorpio-2552035__340.png",
-  // Sagittarius
   SagittariusIcon: "https://cdn.pixabay.com/photo/2017/07/29/12/37/sagittarius-2551400__340.png",
 }
 
