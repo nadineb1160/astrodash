@@ -87,7 +87,8 @@ $(document).ready(function () {
 
     // saveNewData();
 
-    $("#content").show()
+    $("#content").show();
+    $("#scroll").show();
 
     // Get Weather
     queryCurrentWeather(city, state, getPollenBrezData);
