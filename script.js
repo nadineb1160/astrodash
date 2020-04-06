@@ -67,7 +67,9 @@ $(document).ready(function () {
     $("#and").attr("style", "display: block");
     $("#zodiacName").text("Year of the " + czodiac);
 
-    getHoroscope(astrosign, getHoroscopeData);
+    getHoroscope1(astrosign, getHoroscopeData1);
+
+    getHoroscope2(astrosign, getHoroscopeData2);
     // resp now contains the horoscope
     // keyword now has the keyword from horoscope
     // sentiment now has sentiment from horoscope
@@ -283,12 +285,20 @@ $(document).ready(function () {
   }
 
   // Callback function for horoscope call
-  function getHoroscopeData() {
-    keyword = getKeyword();
-    sentiment = getSentiment();
+  function getHoroscopeData1() {
+    keyword = getKeyword(horoscope1);
+    sentiment = getSentiment(horoscope1);
     console.log(keyword);
     console.log(sentiment);
-    wordSet(keyword, sentiment);
+    wordSet1(keyword, sentiment);
+  }
+  // Callback function for horoscope call
+  function getHoroscopeData2() {
+    keyword = getKeyword(horoscope2);
+    sentiment = getSentiment(horoscope2);
+    console.log(keyword);
+    console.log(sentiment);
+    wordSet2(keyword, sentiment);
   }
 
   function getPollenBrezData(lat, lon) {
@@ -297,13 +307,13 @@ $(document).ready(function () {
   }
 
 
-  function getSentiment() {
-    console.log("resp2 = " + resp);
+  function getSentiment(horoscope) {
+    console.log("horoSent = " + horoscope);
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryURL3 =
       "https://api.dandelion.eu/datatxt/sent/v1/?text=" +
-      encodeURI(resp) +
+      encodeURI(horoscope) +
       "&token=" +
       token;
     console.log(queryURL3);
@@ -318,13 +328,13 @@ $(document).ready(function () {
     });
   }
 
-  function getKeyword(options, callback) {
-    console.log("resp2 = " + resp);
+  function getKeyword(horoscope, callback) {
+    console.log("horoKey = " + horoscope);
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryURL2 =
       "https://api.dandelion.eu/datatxt/nex/v1/?text=" +
-      encodeURI(resp) +
+      encodeURI(horoscope) +
       "&min_confidence=0.5" +
       // "&top_entities=1"+
       "&token=" +
@@ -362,7 +372,7 @@ $(document).ready(function () {
     });
   }
 
-  function getHoroscope(horoscope, callback) {
+  function getHoroscope1(horoscope, callback) {
     // var queryURL = "https://ohmanda.com/api/horoscope/" + horoscope + "/";
 
     // var queryURL = "https://cors-anywhere.herokuapp.com/https://sandipbgt.com/theastrologer/api/horoscope/"+horoscope+"/today/"
@@ -393,12 +403,12 @@ $(document).ready(function () {
       callback();
       horoscope1Set(horoscope1);
 
-      getHoroscope2(sign);
+      // getHoroscope2(sign, getHoroscopeData);
     });
   }
 
   // Get Horoscope 2
-  function getHoroscope2(horoscope) {
+  function getHoroscope2(horoscope, callback) {
 
     var sign = horoscope.toLowerCase();
 
@@ -418,7 +428,7 @@ $(document).ready(function () {
       // console.log(reponse.description);
 
       horoscope2 = response.horoscope;
-
+      callback();
       horoscope2Set(horoscope2);
     });
 
@@ -437,11 +447,18 @@ $(document).ready(function () {
   }
 
 
-  function wordSet(word, sentimentOfWord) {
+  function wordSet1(word, sentimentOfWord) {
     console.log("keyword: " + word);
     console.log("sentiment: " + sentimentOfWord);
     $("tileA").text(word); // word of day
     $("tileB").text(sentimentOfWord);  // sentiment
+  }
+
+  function wordSet2(word, sentimentOfWord) {
+    console.log("keyword: " + word);
+    console.log("sentiment: " + sentimentOfWord);
+    $("tileC").text(word); // word of day
+    $("tileD").text(sentimentOfWord);  // sentiment
   }
 
   // Date had format YYYY-MM-DD
