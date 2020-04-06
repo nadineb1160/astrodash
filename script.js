@@ -117,9 +117,14 @@ $(document).ready(function () {
     $("#click").hide();
 
     // Display Zodiac signs
-    $("#horoscopeName").text("Astrological sign " + astrosign);
+    $("#horoscopeName").text(astrosign);
     $("#and").attr("style", "display: block");
     $("#zodiacName").text("Year of the " + czodiac);
+
+    var icon = astrosign + "Icon";
+    var srcURL = horoscopePic[icon];
+
+    $("#horoscopeImg").attr("src", srcURL);
 
     getHoroscope1(astrosign, getHoroscopeData1);
 
