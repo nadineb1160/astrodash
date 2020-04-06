@@ -50,14 +50,14 @@ $(document).ready(function () {
 
   // var tsign = "";
 
+  // Variable to track which horoscope we are on
+  var horoscopeNum = 1;
+
   // Variables for Horoscope text
   var horoscope1, horoscope2;
 
   // Variable for sentiment
   var keyword1, sentiment1, keyword2, sentiment2;
-
-  // Variables for horoscope1 API search
-  var compatibility, mood, color, lucky_num, lucky_time;
 
   // Variable for horoscope2 API search
   var intensity, mood2, keywordsHoro, intensity;
@@ -109,6 +109,7 @@ $(document).ready(function () {
     $("#and").attr("style", "display: block");
     $("#zodiacName").text("Year of the " + czodiac);
 
+    // Horoscope Icon
     var icon = astrosign + "Icon";
     var srcURL = horoscopePic[icon];
 
@@ -432,20 +433,13 @@ $(document).ready(function () {
 
       horoscope1 = response.description;
       console.log(response);
-      // console.log(response.description);
-      // console.log("options="+options)
-      // console.log("resp="+resp)
+      
+      $("#compatibility").text(response.compatibility);
+      $("#mood").text(response.mood);
+      $("#color").text(response.color);
+      $("#lucky_num").text(response.lucky_number);
+      $("#lucky_time").text(response.lucky_time);
 
-      compatibility = response.compatibility;
-      mood = response.mood;
-      color = response.color;
-      lucky_num = response.lucky_number;
-      lucky_time = response.lucky_time;
-      console.log(compatibility);
-      console.log(mood);
-      console.log(color);
-      console.log(lucky_num);
-      console.log(lucky_time);
 
       console.log("HOROSCOPE " + horoscope1);
       callback();
