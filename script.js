@@ -48,15 +48,15 @@ $(document).ready(function () {
       alert("Date entered is not valid!");
     }
 
-    console.log("bday = " + bday);
+    // console.log("bday = " + bday);
 
     // Get Zodiac
     astrosign = getZodiac(bday);
-    console.log("astrosign=" + astrosign);
+    // console.log("astrosign= " + astrosign);
 
     // Get Chinese Zodiac
     czodiac = chineseZodiac(bday);
-    console.log("czodiac=" + czodiac);
+    // console.log("czodiac= " + czodiac);
 
     // Hide Welcome Message
     $("#welcomeMessage").hide();
@@ -70,10 +70,7 @@ $(document).ready(function () {
     getHoroscope1(astrosign, getHoroscopeData1);
 
     getHoroscope2(astrosign, getHoroscopeData2);
-    // resp now contains the horoscope
-    // keyword now has the keyword from horoscope
-    // sentiment now has sentiment from horoscope
-
+  
     // console.log("keyword: ", keyword);
     // console.log("resp: ", resp);
     // $("tileA").text(keyword); // word of day
@@ -154,12 +151,10 @@ $(document).ready(function () {
   function getZodiac(indate) {
     var tdate = moment(indate); // any date will be converted
 
-    console.log(tdate.calendar())
+    // console.log(tdate.calendar())
     // console.log(tdate);
     var day = tdate.date();
     var month = tdate.month() + 1;
-
-    console.log(month + " // " + day)
 
     // Capricorn - Dec 22 - Jan 19
     if (
@@ -270,15 +265,13 @@ $(document).ready(function () {
       .lunar()
       .format("YYYY-MM-DD");
 
-    console.log("Test " + indate + " into lunar is " + tlunar2);
+    // console.log("Test " + indate + " into lunar is " + tlunar2);
 
     var tlunarYear = moment(tlunar2).year();
 
-    tsign = zodiacTable[tlunarYear % 12];
+    czodiac = zodiacTable[tlunarYear % 12];
 
-    console.log("tsign = " + tsign);
-
-    return tsign;
+    return czodiac;
 
     // 1924 = Rat
     // 1920 % 12 = 0
@@ -288,16 +281,16 @@ $(document).ready(function () {
   function getHoroscopeData1() {
     keyword = getKeyword(horoscope1);
     sentiment = getSentiment(horoscope1);
-    console.log(keyword);
-    console.log(sentiment);
+    console.log("key1= " + keyword);
+    console.log("sent1= " + sentiment);
     wordSet1(keyword, sentiment);
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
     keyword = getKeyword(horoscope2);
     sentiment = getSentiment(horoscope2);
-    console.log(keyword);
-    console.log(sentiment);
+    console.log("key2= " + keyword);
+    console.log("sent2= " +sentiment);
     wordSet2(keyword, sentiment);
   }
 
@@ -308,31 +301,29 @@ $(document).ready(function () {
 
 
   function getSentiment(horoscope) {
-    console.log("horoSent = " + horoscope);
     token = "8921d8d3e0274f0997aa91de967aca75";
 
-    queryURL3 =
+    querySentimentURL =
       "https://api.dandelion.eu/datatxt/sent/v1/?text=" +
       encodeURI(horoscope) +
       "&token=" +
       token;
-    console.log(queryURL3);
+    
     $.ajax({
       type: "POST",
-      url: queryURL3,
+      url: querySentimentURL,
       dataType: "json"
     }).then(function (response) {
       //   console.log(response);
-      console.log(response.sentiment.type);
+      console.log("sentType = " + response.sentiment.type);
       return response.sentiment.type;
     });
   }
 
-  function getKeyword(horoscope, callback) {
-    console.log("horoKey = " + horoscope);
+  function getKeyword(horoscope) {
     token = "8921d8d3e0274f0997aa91de967aca75";
 
-    queryURL2 =
+    queryKeywordURL =
       "https://api.dandelion.eu/datatxt/nex/v1/?text=" +
       encodeURI(horoscope) +
       "&min_confidence=0.5" +
@@ -340,14 +331,13 @@ $(document).ready(function () {
       "&token=" +
       token;
 
-    console.log(queryURL2);
     $.ajax({
       type: "POST",
-      url: queryURL2,
+      url: queryKeywordURL,
       dataType: "json"
     }).then(function (response) {
-      console.log(response);
-      console.log(response.description);
+      // console.log(response);
+      // console.log(response.description);
       var arr = response.annotations;
       // sample reply  arr[x]   (useful spot,title, label)
       // start: 191
@@ -379,11 +369,11 @@ $(document).ready(function () {
     // var res;
 
     var sign = horoscope.toLowerCase();
-    var queryURL = "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
+    var queryHoro1URL = "https://aztro.sameerkumar.website?sign=" + sign + "&day=today";
 
     $.ajax({
       type: "POST",
-      url: queryURL,
+      url: queryHoro1URL,
       dataType: "json"
     }).then(function (response) {
       // options = response.description;
@@ -412,14 +402,14 @@ $(document).ready(function () {
 
     var sign = horoscope.toLowerCase();
 
-    var queryURL2 = "https://cors-anywhere.herokuapp.com/http://sandipbgt.com/theastrologer/api/horoscope/" + sign + "/today/";
+    var queryHoro2URL = "https://cors-anywhere.herokuapp.com/http://sandipbgt.com/theastrologer/api/horoscope/" + sign + "/today/";
     $.ajax({
       // headers: {
       //     "Access-Control-Allow-Origin": "*",
       //     "Content-Type": "application/json"
       //   },
       // type: 'POST',
-      url: queryURL2,
+      url: queryHoro2URL,
       method: "GET",
       dataType: "json"
     }).then(function (response) {
@@ -466,11 +456,9 @@ $(document).ready(function () {
 
     // Get current day
     var currentDay = moment().format("YYYY-MM-DD");
-    console.log(currentDay);
+    // console.log(currentDay);
 
     currentDay = currentDay.split("-");
-    console.log("Current Day: ")
-    console.log(currentDay);
     var yearCurrent = currentDay[0];
     var monthCurrent = currentDay[1];
     var dayCurrent = currentDay[2];
@@ -519,7 +507,7 @@ $(document).ready(function () {
     // console.log(date);
 
     date += "T00:00:00+00:00";
-    console.log(date);
+    // console.log(date);
     $("#bday-countdown").attr("uk-countdown", "date: " + date);
     $("#bday-countdown").attr("style", "display:block");
 
@@ -546,7 +534,6 @@ $(document).ready(function () {
 
   // Get Weather Data
   function queryCurrentWeather(inCity, inState, callback) {
-    console.log(inCity);
 
     var weather = {
       cityName: "",
@@ -557,7 +544,7 @@ $(document).ready(function () {
       wind: "",
     };
 
-    var queryurl1 =
+    var queryWeatherURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       encodeURI(inCity) +
       "," +
@@ -566,15 +553,11 @@ $(document).ready(function () {
       owmapikey;
 
     // perform AJAX query here
-    console.log(queryurl1);
-
     $.ajax({
-      url: queryurl1,
+      url: queryWeatherURL,
       method: "GET",
     }).then(function (response) {
       res = response;
-
-      console.log(res);
 
       weather.cityName = res.name;
       // "San Francisco Weather"
@@ -582,7 +565,6 @@ $(document).ready(function () {
 
       // Weather Icon
       var iconId = res.weather[0].icon; // how to convert that to real icon?
-      console.log(iconId);
 
       // Icon URL
       weather.weatherIconUrl =
@@ -653,20 +635,18 @@ $(document).ready(function () {
       "&key=" +
       breezokey;
 
-    console.log(queryBreezeURL);
     $.ajax({
       type: "GET",
       url: queryBreezeURL,
       dataType: "json",
     }).then(function (response) {
       // options = response.description;
-      resp = response.data.indexes.baqi.aqi;
-      console.log(resp);
+      var airIndex = response.data.indexes.baqi.aqi;
+      // console.log(resp);
 
-      $("h2#modal6").text("Your local Air Quality Index");
-      $("#app6").text(resp);
+      $("#airIndex").text(airIndex);
 
-      return resp;
+      return airIndex;
       // callback();
     });
   }
@@ -684,7 +664,6 @@ $(document).ready(function () {
       "&key=" +
       breezokey;
 
-    console.log(queryPollenURL);
     $.ajax({
       type: "GET",
       url: queryPollenURL,
@@ -698,7 +677,6 @@ $(document).ready(function () {
       try {
         txt = "<P>Grass pollen data = " + resp.grass.index.value + "</P>";
         thtml += txt;
-        console.log(thtml);
       } catch (err) {
         console.log("no grass pollen info / " + thtml);
       }
@@ -706,7 +684,6 @@ $(document).ready(function () {
       try {
         txt = "<P>Tree pollen data = " + resp.tree.index.value + "</P>";
         thtml += txt;
-        console.log(thtml);
       } catch (err) {
         console.log("no tree pollen info / " + thtml);
       }
@@ -714,7 +691,6 @@ $(document).ready(function () {
       try {
         txt = "<P>Weed pollen data = " + resp.weed.index.value + "</P>";
         thtml += txt;
-        console.log(thtml);
       } catch (err) {
         console.log("no weed pollen info / " + thtml);
       }
