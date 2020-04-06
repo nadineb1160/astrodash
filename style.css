@@ -50,13 +50,18 @@ body {
 #signs {
   text-align: center;
   color: white;
+  font-size: 40px;
 }
 
 #bday-countdown {
   display: none;
-  top: 50px;
+  top: 120px;
   color: white;
-  font-size: smaller;
+  text-align: center;
+}
+
+.uk-countdown-number {
+    font-size: 30px;
 }
 
 #bday-count-head {
