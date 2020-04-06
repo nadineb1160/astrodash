@@ -1,40 +1,28 @@
 // Photos for Horoscope
 var horoscopePic = {
   // Capricorn
-  Capricorn: "",
   CapricornIcon: "https://cdn.pixabay.com/photo/2017/07/29/18/41/capricorn-2552366__340.png",
   // Aquarius
-  Aquarius: "",
   AquariusIcon: "https://cdn.pixabay.com/photo/2017/07/29/13/24/aquarius-2551502__340.png",
   // Pisces
-  Pisces: "",
   PiscesIcon: "https://cdn.pixabay.com/photo/2017/07/29/15/56/pisces-2551918__340.png",
   // Aries
-  Aries: "",
   AriesIcon: "https://cdn.pixabay.com/photo/2017/07/28/22/02/aries-2549974__340.png",
   // Taurus
-  Taurus: "",
   TaurusIcon: "https://cdn.pixabay.com/photo/2017/07/28/22/46/taurus-2550112__340.png",
   // Gemini
-  Gemini: "",
   GeminiIcon: "https://cdn.pixabay.com/photo/2017/07/28/23/22/gemini-2550197__340.png",
   // Cancer
-  Cancer: "",
   CancerIcon: "https://cdn.pixabay.com/photo/2017/07/29/13/07/cancer-2551431__340.png",
   // Leo
-  Leo: "",
   LeoIcon: "https://cdn.pixabay.com/photo/2017/07/29/12/19/leo-2551352__340.png",
   // Virgo
-  Virgo: "",
   VirgoIcon: "https://cdn.pixabay.com/photo/2017/07/29/18/09/virgo-2552259_960_720.png",
   // Libra
-  Libra: "",
   LibraIcon: "https://cdn.pixabay.com/photo/2017/07/29/19/42/libra-2552502__340.png",
   // Scorpio
-  Scorpio: "",
   ScorpioIcon: "https://cdn.pixabay.com/photo/2017/07/29/16/44/scorpio-2552035__340.png",
   // Sagittarius
-  Sagittarius: "",
   SagittariusIcon: "https://cdn.pixabay.com/photo/2017/07/29/12/37/sagittarius-2551400__340.png",
 }
 
@@ -340,9 +328,9 @@ $(document).ready(function () {
   function getHoroscopeData1() {
 
     sentiment1 = getSentiment(horoscope1);
-    
+
     keyword1 = getKeyword(horoscope1, wordSet1(keyword1, sentiment1));
-    
+
     // wordSet1(keyword1, sentiment1);
 
     getHoroscope2(astrosign, getHoroscopeData2);
@@ -353,7 +341,7 @@ $(document).ready(function () {
     sentiment2 = getSentiment(horoscope2);
 
     keyword1 = getKeyword(horoscope2, wordSet2(keyword2, sentiment2));
-    
+
     // wordSet2(keyword2, sentiment2);
   }
 
@@ -441,7 +429,7 @@ $(document).ready(function () {
       url: queryHoro1URL,
       dataType: "json"
     }).then(function (response) {
-      
+
       horoscope1 = response.description;
       console.log(response);
       // console.log(response.description);
