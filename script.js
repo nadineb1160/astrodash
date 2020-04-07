@@ -52,75 +52,130 @@ $(document).ready(function () {
   // Get previous data
   getPrevData();
 
+  // Validation
+  $("#form").validate({
+    debug: true,
+    rules: {
+      bdayMonth: {
+        required: "true",
+        minlength: 2,
+        maxlength: 2
+      },
+      bdayDay: {
+        required: "true",
+        minlength: 2,
+        maxlength: 2
+      },
+      bdayYear: {
+        required: "true",
+        minlength: 4,
+        maxlength: 4
+      },
+      city: {
+        required: "true",
+        minlength: 3
+      },
+      state: {
+        required: "true",
+        minlength: 3
+      }
+
+    },
+    messages: {
+      bdayMonth: {
+        required: "Please enter a month - MM",
+        length: "Search term must be 2 characters long"
+      },
+      bdayDay: {
+        required: "Please enter a day - DD",
+        length: "Search term must be 2 characters long"
+      },
+      bdayYear: {
+        required: "Please enter a year - YYYY",
+        length: "Search term must be 4 characters long"
+      },
+      city: {
+        required: "Please enter a city",
+        minlength: "Search term must be at least 3 characters long"
+      },
+      state: {
+        required: "Please enter a state",
+        minlength: "Search term must be at least 3 characters long"
+      }
+    }
+  })
+
   // Submit Form
   $("#bday-submit").on("click", function (event) {
+    if ($("#form").valid()) {
+      // Prevent Default Form Behavior
+      event.preventDefault();
 
-    // Prevent Default Form Behavior
-    event.preventDefault();
+      // Get Birthday Date
+      month = $("#bdayMonth").val();
+      day = $("#bdayDay").val();
+      year = $("#bdayYear").val();
 
-    // Get Birthday Date
-    month = $("#bday-month").val();
-    day = $("#bday-day").val();
-    year = $("#bday-year").val();
+      date = year + "-" + month + "-" + day;
 
-    date = year + "-" + month + "-" + day;
+      bday = moment(date, "YYYY-MM-DD", true);
 
-    bday = moment(date, "YYYY-MM-DD", true);
+      if (!bday.isValid()) {
+        alert("Date entered is not valid!");
+      }
 
-    if (!bday.isValid()) {
-      alert("Date entered is not valid!");
+      // console.log("bday = " + bday);
+
+      // Get Zodiac
+      astrosign = getZodiac(bday);
+      // console.log("astrosign= " + astrosign);
+
+      // Get Chinese Zodiac
+      czodiac = chineseZodiac(bday);
+      // console.log("czodiac= " + czodiac);
+
+      // Hide Welcome Message
+      $("#welcomeMessage").hide();
+      $("#click").hide();
+
+      // Display Zodiac signs
+      $("#horoscopeName").text(astrosign);
+      $("#and").attr("style", "display: block");
+      $("#zodiacName").text("Year of the " + czodiac);
+
+      // Horoscope Icon
+      var icon = astrosign + "Icon";
+      var srcURL = horoscopePic[icon];
+
+      $("#horoscopeImg").attr("src", srcURL);
+
+      getHoroscope1(astrosign, getHoroscopeData1(getHoroscope2(astrosign, getHoroscopeData2)));
+
+      // Get Horoscope 2 
+      // getHoroscope2(astrosign, getHoroscopeData2);
+
+
+      timerSet(date);
+
+      // getGiphyImages(czodiac);
+      // getQuotes(keyword);
+      // getTidalInfo(curlat, curlon)
+
+      // Get Location
+      city = $("#city").val();
+      state = $("#state").val();
+
+      // saveNewData();
+
+      $("#content").show();
+      $("#scroll").show();
+
+      // Get Weather
+      queryCurrentWeather(city, state, getPollenBrezData);
+
     }
-
-    // console.log("bday = " + bday);
-
-    // Get Zodiac
-    astrosign = getZodiac(bday);
-    // console.log("astrosign= " + astrosign);
-
-    // Get Chinese Zodiac
-    czodiac = chineseZodiac(bday);
-    // console.log("czodiac= " + czodiac);
-
-    // Hide Welcome Message
-    $("#welcomeMessage").hide();
-    $("#click").hide();
-
-    // Display Zodiac signs
-    $("#horoscopeName").text(astrosign);
-    $("#and").attr("style", "display: block");
-    $("#zodiacName").text("Year of the " + czodiac);
-
-    // Horoscope Icon
-    var icon = astrosign + "Icon";
-    var srcURL = horoscopePic[icon];
-
-    $("#horoscopeImg").attr("src", srcURL);
-
-    getHoroscope1(astrosign, getHoroscopeData1(getHoroscope2(astrosign, getHoroscopeData2)));
-
-    // Get Horoscope 2 
-    // getHoroscope2(astrosign, getHoroscopeData2);
-
-
-    timerSet(date);
-
-    // getGiphyImages(czodiac);
-    // getQuotes(keyword);
-    // getTidalInfo(curlat, curlon)
-
-    // Get Location
-    city = $("#city").val();
-    state = $("#state").val();
-
-    // saveNewData();
-
-    $("#content").show();
-    $("#scroll").show();
-
-    // Get Weather
-    queryCurrentWeather(city, state, getPollenBrezData);
-
   });
+
 
   // Get Previous Bday and City
   function getPrevData() {
@@ -303,7 +358,7 @@ $(document).ready(function () {
   }
 
   // Callback function for horoscope call
-  function getHoroscopeData1(callback) { 
+  function getHoroscopeData1(callback) {
 
     isHoro1 = true;
     isHoro2 = false;
@@ -713,10 +768,10 @@ $(document).ready(function () {
       url: queryPollenURL,
       dataType: "json",
     }).then(function (response) {
-      
+
       // Types of pollen
       var pollen = response.data[0].types;
-   
+
 
       try {
         // Check Out of Season
