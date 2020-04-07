@@ -11,6 +11,12 @@ id="background"> --> */
   height: 100vh;
 }
 
+.error
+{
+color:red;
+font-family:verdana, Helvetica;
+}
+
 /* #content {
     display: hide;
 } */
