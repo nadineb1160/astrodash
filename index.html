@@ -24,9 +24,6 @@
 
     <!-- Main Image -->
     <div class="uk-container uk-container-large" id="landing">
-        <!-- <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
-        style="background-image: url('https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg');"
-        id="background"> -->
 
         <!-- Logo -->
         <h1 class="uk-heading-medium uk-padding uk-position-top-center" id="heading"><a href="index.html">AstroDash</a>
@@ -44,6 +41,7 @@
             <!-- Birthday modal -->
             <div id="modal-example" uk-modal>
                 <div class="uk-modal-dialog" id="bday-form">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
 
                     <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top">
                         <fieldset class="uk-fieldset">
@@ -77,6 +75,7 @@
                             <!-- Location Input -->
                             <div class="uk-margin uk-width-1-2 uk-display-inline">
                                 <h4>Enter Your Current City:</h4>
+
                                 <!-- City Input -->
                                 <div class="uk-margin">
                                     <input class="uk-input" type="text" id="city" placeholder="San Francisco">
@@ -100,20 +99,6 @@
             </div>
 
         </div>
-        <!-- 
-
-        Horoscope Display
-        <h3 class="uk-heading-medium uk-position-center" id="signs">
-
-            Horoscope Name
-            <p id="horoscopeName"></p>
-
-            <p id="and">&</p>
-
-            Chinese Zodiac Name
-            <p id="zodiacName"></p>
-        </h3> -->
-
 
         <!-- Birthday Countdown -->
         <div class="uk-position-center uk-padding" uk-countdown="date: 2020-04-08T00:00:00+00:00" id="bday-countdown">
@@ -150,15 +135,11 @@
     <div class="uk-container uk-container-large" id="content">
 
         <!-- Horoscope Display -->
-        <h3 class="uk-heading" id="signs">
+        <h3 class="uk-heading signs">
 
             <!-- Horoscope Name -->
             <p id="horoscopeName"></p>
 
-            <!-- <p id="and">&</p> -->
-
-            <!-- Chinese Zodiac Name -->
-            <!-- <p id="zodiacName"></p> -->
         </h3>
 
         <div class="uk-child-width-1-2@m uk-grid-match uk-margin uk-padding" id="horoscopeIntro" uk-grid>
@@ -168,8 +149,8 @@
 
             <div>
                 <p class="uk-text-center" id="horoscopeText">Expressive and quick-witted, Gemini represents two
-                    different personalities in one
-                    and you will never be sure which one you will face. They are sociable, communicative and ready for
+                    different personalities in one and you will never be sure which one you will face. They are
+                    sociable, communicative and ready for
                     fun, with a tendency to suddenly get serious, thoughtful and restless. They are fascinated with the
                     world itself, extremely curious, with a constant feeling that there is not enough time to experience
                     everything they want to see.</p>
@@ -253,6 +234,15 @@
 
         <br>
 
+        <!-- Horoscope Display -->
+        <h3 class="uk-heading signs">
+
+            <!-- Chinese Zodiac Name -->
+            <p id="zodiacName"></p>
+        </h3>
+
+        <br>
+
         <!-- Tiles -->
         <!-- <div class="uk-child-width-1-4@s uk-grid-collapse uk-text-center uk-margin-top" uk-grid>
 
@@ -311,7 +301,7 @@
         </div>
 
         <br>
-       
+
         <!-- Horoscope 2 panel -->
         <div class="panels">
 
@@ -345,6 +335,7 @@
         <br><br>
 
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+
             <!-- Weather App -->
             <div class="uk-child-width-1 uk-grid-match uk-height-large" id="weather">
                 <div class="uk-background-fixed uk-background-center-center uk-align-left uk-height-large"
@@ -407,8 +398,9 @@
 
         <br><br>
 
-        <div class="uk-overlay-default uk-text-center uk-padding">
-            <a href="natalChart.html" id="natalChart">Click to get your Natal Chart!</a>
+        <!-- Natal Chart Bar -->
+        <div class="uk-text-center uk-padding">
+            <a href="natalChart.html" id="natalChartLink">Click to get your Natal Chart!</a>
         </div>
 
         <!-- Quotes
