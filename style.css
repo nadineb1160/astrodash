@@ -1,6 +1,13 @@
-/* <!-- <div class="uk-height-large uk-background-cover uk-light uk-flex uk-position-relative" uk-parallax="bgy: -200"
-style="background-image: url('https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg');"
-id="background"> --> */
+/* ----------------- */
+/* Index.hmtl style */
+/* ----------------- */
+
+/* HTML */
+html {
+  background-color: black;
+}
+
+/* Landing Page */
 #landing {
   background: url("https://cdn.pixabay.com/photo/2015/11/04/20/59/milky-way-1023340_960_720.jpg")
     no-repeat center center fixed;
@@ -11,31 +18,19 @@ id="background"> --> */
   height: 100vh;
 }
 
+/* Error Message */
 .error
 {
 color:red;
 font-family:verdana, Helvetica;
 }
 
-/* #content {
-    display: hide;
-} */
-
-html {
-  background-color: black;
-}
-
-.nav {
-  text-align: center;
-}
-
+/* Welcome Message */
 #welcomeMessage {
   color: black;
-  /* background-color: black; */
-  /* padding: 10px; */
-  /* border-radius: 15px; */
 }
 
+/* Click to get Horoscope */
 #click {
   font-size: larger;
   background-color: black;
@@ -45,6 +40,7 @@ html {
   border-radius: 15px;
 }
 
+/* Google Font */
 #heading,
 #horoscopeName,
 #zodiacName,
@@ -53,11 +49,13 @@ html {
   font-family: "Orbitron", sans-serif;
 }
 
+/* Heading Link - AstroDash */
 #heading a {
   color: white;
   margin: 40px;
 }
 
+/* Zodiac Signs */
 .signs {
   text-align: center;
   color: white;
@@ -68,10 +66,12 @@ html {
   border-radius: 15px;
 }
 
-.uk-position-medium {
+/* Note: check where this is applied */
+.uk-position-medium { 
   margin: 0px;
 }
 
+/* Birthday Countdown */
 #bday-countdown {
   display: none;
   top: 325px;
@@ -79,10 +79,7 @@ html {
   text-align: center;
 }
 
-.uk-countdown-number {
-  font-size: 30px;
-}
-
+/* Birthday Countdown Header */
 #bday-count-head {
   text-align: center;
   font-family: "Orbitron", sans-serif;
@@ -90,63 +87,55 @@ html {
   background-color: black;
   padding: 10px;
   border-radius: 15px;
+  bottom: 110px;
 }
 
-#background {
-  height: 1000px;
+/* Birthday Countdown Number */
+.uk-countdown-number {
+  font-size: 30px;
 }
 
+/* Form */
 #bday-form1 {
   /* margin-top: 200px; */
   display: none;
 }
-/* 
-#horoscope-description {
-    display: none;
-} */
 
-#bday-count-head {
-  bottom: 110px;
-}
-
+/* Scroll Message and Icon */
 #scroll {
   display: none;
   font-size: 20px;
   color: white;
 }
 
+/* Horoscope Text */
 #horoscopeText {
   font-size: larger;
 }
 
+/* Source - Horoscope 1 */
 #source {
   color: grey;
 }
 
+/* Horoscope header */
 h3 {
   color: black;
 }
 
+/* Natal Chart Link */
 #natalChartLink {
   font-size: 40px;
   color: white;
 }
 
-#natalChart {
-  top: 200px;
-  right: 50px;
-}
 
-#natalChartHeading {
-  top: 100px;
-  right: 50px;
-  text-align: center;
-}
-
+/* Overlay */
 .uk-overlay-default {
   width: 100%;
 }
 
+/* Horoscopes and Stats */
 .horoscope1, 
 .horoscope2, 
 .horoscope1Stats, 
@@ -156,41 +145,46 @@ h3 {
   color: black;
 }
 
+/* Horoscope 1 */
 .horoscope1 {
   background-color: #f57c00;
 }
+
+/* Horoscope 1 Stats */
 .horoscope1Stats {
   background-color: #ffb74d;
 }
 
+/* Horoscope 2 */
 .horoscope2 {
   background-color: #00838f;
 }
 
+/* Horoscope 2 Stats */
 .horoscope2Stats {
   background-color: #4dd0e1;
 }
 
-/* .panel-text {
-  margin-top: auto;
-  margin-bottom: auto;
-} */
+/* Stats Panel */
+.panels {
+  margin-top: 40px;
+}
 
+/* Panel Labels */
 .panel-text label {
   font-size: 20px;
   color: white;
 }
 
+/* Panel Text */
 .panel-text span {
   font-size: 30px;
   color: grey;
 }
 
-.panels {
-  margin-top: 40px;
-}
 
-.tileColor1 {
+
+/* .tileColor1 {
   background-color: #ffe0b2;
 }
 
@@ -206,8 +200,23 @@ h3 {
 }
 .quote3 {
   background-color: #f8bbd0;
+} */
+
+
+
+/* ---------------- */
+/* Natal Chart Page */
+/* ---------------- */
+
+/* Chart */
+#natalChart {
+  top: 200px;
+  right: 50px;
 }
 
-#and {
-  display: none;
+/* Chart Heading */
+#natalChartHeading {
+  top: 100px;
+  right: 50px;
+  text-align: center;
 }
