@@ -107,6 +107,14 @@ html {
   color: white;
 }
 
+#horoscopeText {
+  font-size: larger;
+}
+
+#source {
+  color: grey;
+}
+
 h3 {
   color: black;
 }
@@ -126,18 +134,43 @@ h3 {
   width: 100%;
 }
 
-.horoscope1,
-.horoscope2 {
-  background-color: #fafafa;
+.horoscope1, 
+.horoscope2, 
+.horoscope1Stats, 
+.horoscope2Stats {
   border-radius: 15px;
   text-align: center;
+  color: black;
 }
 
-.horoscope1Stats,
+.horoscope1 {
+  background-color: #f57c00;
+}
+.horoscope1Stats {
+  background-color: #ffb74d;
+}
+
+.horoscope2 {
+  background-color: #00838f;
+}
+
 .horoscope2Stats {
-  background-color: #fafafa;
-  border-radius: 15px;
-  text-align: center;
+  background-color: #4dd0e1;
+}
+
+.panel-text {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.panel-text label {
+  font-size: 20px;
+  color: white;
+}
+
+.panel-text span {
+  font-size: 30px;
+  color: grey;
 }
 
 .tileColor1 {
