@@ -158,10 +158,10 @@ h3 {
   background-color: #4dd0e1;
 }
 
-.panel-text {
+/* .panel-text {
   margin-top: auto;
   margin-bottom: auto;
-}
+} */
 
 .panel-text label {
   font-size: 20px;
@@ -171,6 +171,10 @@ h3 {
 .panel-text span {
   font-size: 30px;
   color: grey;
+}
+
+.panels {
+  margin-top: 40px;
 }
 
 .tileColor1 {
