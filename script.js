@@ -121,7 +121,7 @@ $(document).ready(function () {
       bday = moment(date, "YYYY-MM-DD", true);
 
       if (!bday.isValid()) {
-        alert("Date entered is not valid!");
+        console.log("Date entered is not valid!");
       }
 
       // console.log("bday = " + bday);
