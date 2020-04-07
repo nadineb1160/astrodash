@@ -321,17 +321,22 @@ $(document).ready(function () {
 
     // wordSet1(keyword1, sentiment1);
 
-    getHoroscope2(astrosign, getHoroscopeData2);
+    // getHoroscope2(astrosign, getHoroscopeData2);
+    console.log("This is horoscope num " + horoscopeNum);
+
     
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
 
+    horoscopeNum += 1;
+    console.log("This is horoscope num " + horoscopeNum);
+
     getSentiment(horoscope2);
 
     getKeyword(horoscope2);
 
-    wordSet2(keyword2, sentiment2)
+    // wordSet2(keyword2, sentiment2)
     // wordSet2(keyword2, sentiment2);
   }
 
@@ -468,16 +473,13 @@ $(document).ready(function () {
       method: "GET",
       dataType: "json"
     }).then(function (response) {
-      console.log(response);
-      // console.log("hello");
-      // console.log(reponse.description);
 
       horoscope2 = response.horoscope;
-      mood2 = response.meta.mood;
-      keywordsHoro = response.meta.keywords;
-      intensity = response.meta.intensity;
+      $("#mood2").text(response.meta.mood);
+      $("#keywordsHoro").text(response.meta.keywords);
+      $("#intensity").text(response.meta.intensity);
       callback();
-      // horoscope2Set(horoscope2);
+      // Set Horoscope 2
       horoscope2Set(horoscope2);
     });
 
@@ -485,7 +487,6 @@ $(document).ready(function () {
 
   // Set horoscope API info
   function horoscope1Set(horoscope1) {
-    console.log("horoscope1 = " + horoscope1);
     $("#horoscope1").text(horoscope1);
 
     // Get Horoscope 2 
@@ -494,24 +495,23 @@ $(document).ready(function () {
 
   // Set horoscope API info
   function horoscope2Set(horoscope2) {
-    console.log("horoscope2 = " + horoscope2);
     $("#horoscope2").text(horoscope2);
   }
 
 
-  function wordSet1(word, sentimentOfWord) {
-    console.log("keyword: " + word);
-    console.log("sentiment: " + sentimentOfWord);
-    $(".tileA").text(word); // word of day
-    $(".tileB").text(sentimentOfWord);  // sentiment
-  }
+  // function wordSet1(word, sentimentOfWord) {
+  //   console.log("keyword: " + word);
+  //   console.log("sentiment: " + sentimentOfWord);
+  //   $(".tileA").text(word); // word of day
+  //   $(".tileB").text(sentimentOfWord);  // sentiment
+  // }
 
-  function wordSet2(word, sentimentOfWord) {
-    console.log("keyword: " + word);
-    console.log("sentiment: " + sentimentOfWord);
-    $(".tileC").text(word); // word of day
-    $(".tileD").text(sentimentOfWord);  // sentiment
-  }
+  // function wordSet2(word, sentimentOfWord) {
+  //   console.log("keyword: " + word);
+  //   console.log("sentiment: " + sentimentOfWord);
+  //   $(".tileC").text(word); // word of day
+  //   $(".tileD").text(sentimentOfWord);  // sentiment
+  // }
 
   // Date had format YYYY-MM-DD
   function timerSet(date) {
