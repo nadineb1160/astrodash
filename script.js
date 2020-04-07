@@ -96,7 +96,7 @@ $(document).ready(function () {
 
     $("#horoscopeImg").attr("src", srcURL);
 
-    getHoroscope1(astrosign, getHoroscopeData1);
+    getHoroscope1(astrosign, getHoroscopeData1(getHoroscope2(astrosign, getHoroscopeData2)));
 
     // Get Horoscope 2 
     // getHoroscope2(astrosign, getHoroscopeData2);
@@ -311,7 +311,7 @@ $(document).ready(function () {
     getSentiment(horoscope1);
     // console.log("sentemintent1: " + sentiment1)
 
-    getKeyword(horoscope1, getHoroscope2(astrosign, getHoroscopeData2));
+    getKeyword(horoscope1);
 
     // getHoroscope2(astrosign, getHoroscopeData2);
     // console.log("is horoscope num 1 " + isHoro1);
@@ -328,7 +328,7 @@ $(document).ready(function () {
 
     getSentiment(horoscope2);
 
-    getKeyword(horoscope2, horoscope2Set(horoscope2));
+    getKeyword(horoscope2);
 
     // wordSet2(keyword2, sentiment2)
     // wordSet2(keyword2, sentiment2);
@@ -373,7 +373,7 @@ $(document).ready(function () {
     });
   }
 
-  function getKeyword(horoscope, callback) {
+  function getKeyword(horoscope) {
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryKeywordURL =
@@ -435,7 +435,7 @@ $(document).ready(function () {
       $("#lucky_num").text(response.lucky_number);
       $("#lucky_time").text(response.lucky_time);
 
-      callback();
+      // callback();
       horoscope1Set(horoscope1);
 
     });
@@ -464,7 +464,7 @@ $(document).ready(function () {
       $("#intensity").text(response.meta.intensity);
       callback();
       // // Set Horoscope 2
-      // horoscope2Set(horoscope2);
+      horoscope2Set(horoscope2);
     });
 
   }
