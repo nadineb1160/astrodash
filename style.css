@@ -101,6 +101,12 @@ font-family:verdana, Helvetica;
   display: none;
 }
 
+/* Submitted Message */
+#submitted {
+  color: red;
+  display: none;
+}
+
 /* Scroll Message and Icon */
 #scroll {
   display: none;
