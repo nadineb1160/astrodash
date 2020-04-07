@@ -35,7 +35,7 @@ $(document).ready(function () {
   $("#content").hide();
 
   // Variable to track which horoscope we are on
-  var horoscopeNum = 1;
+  var isHoro1, isHoro2 = false;
 
   // Variables for Horoscope text
   var horoscope1, horoscope2;
@@ -101,15 +101,11 @@ $(document).ready(function () {
 
     getHoroscope1(astrosign, getHoroscopeData1);
 
-    // getHoroscope2(astrosign, getHoroscopeData2);
+    // Get Horoscope 2 
+    getHoroscope2(astrosign, getHoroscopeData2);
 
-    // console.log("keyword: ", keyword);
-    // console.log("resp: ", resp);
-    // $("tileA").text(keyword); // word of day
-    // $("tileB").text(resp);  // sentiment
 
     timerSet(date);
-    // console.log(resp);
 
     // getGiphyImages(czodiac);
     // getQuotes(keyword);
@@ -310,7 +306,9 @@ $(document).ready(function () {
   }
 
   // Callback function for horoscope call
-  function getHoroscopeData1() {
+  function getHoroscopeData1() { 
+
+    isHoro1 = true;
 
     getSentiment(horoscope1);
     // console.log("sentemintent1: " + sentiment1)
@@ -322,15 +320,15 @@ $(document).ready(function () {
     // wordSet1(keyword1, sentiment1);
 
     // getHoroscope2(astrosign, getHoroscopeData2);
-    console.log("This is horoscope num " + horoscopeNum);
+    console.log("is horoscope num 1 " + isHoro1);
 
-    
+
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
 
-    horoscopeNum += 1;
-    console.log("This is horoscope num " + horoscopeNum);
+    isHoro2 = true;
+    console.log("is horoscope num 1" + isHoro2);
 
     getSentiment(horoscope2);
 
@@ -360,15 +358,14 @@ $(document).ready(function () {
       url: querySentimentURL,
       dataType: "json"
     }).then(function (response) {
-      console.log("hi");
-      //   console.log(response);
       var sentiment = response.sentiment.type
-      console.log("sentType = " + response.sentiment.type);
-      console.log(sentiment);
-      if (horoscopeNum === 1) {
+
+      console.log("sentiment " + sentiment)
+      // Set sentiment text
+      if (isHoro1) {
         $("#sentiment1").text(sentiment);
       }
-      else if (horoscopeNum === 2) {
+      else if (isHoro2) {
         $("#sentiment2").text(sentiment);
       }
       // return sentiment
@@ -391,34 +388,20 @@ $(document).ready(function () {
       url: queryKeywordURL,
       dataType: "json"
     }).then(function (response) {
-      console.log("resp:")
-      console.log(response);
-      var arr = response.annotations;
-      // sample reply  arr[x]   (useful spot,title, label)
-      // start: 191
-      // end: 196
-      // spot: "happy"
-      // confidence: 0.5371
-      // id: 169409
-      // title: "Happiness"
-      // uri: "http://en.wikipedia.org/wiki/Happiness"
-      // label: "Happiness"
 
-      //  concat version
-      //concat = ""
-      // for (var i=0; i<arr.length;i++) {
-      //     concat = concat + arr[i].label
-      // }
-      // random version
+      // Array of Annotaions
+      var arr = response.annotations;
+
+      // Random Index
       var rand = Math.floor(Math.random() * arr.length);
       console.log("label", arr[rand].label);
 
       var keyword = arr[rand].label;
 
-      if (horoscopeNum === 1) {
+      if (isHoro1) {
         $("#keyword1").text(keyword);
       }
-      else if (horoscopeNum === 2) {
+      else if (isHoro2) {
         $("#keyword2").text(keyword);
 
       }
@@ -439,21 +422,19 @@ $(document).ready(function () {
       dataType: "json"
     }).then(function (response) {
 
+      // Horoscope 1
       horoscope1 = response.description;
-      console.log(response);
-      
+
+      // Horoscope 1 Stats
       $("#compatibility").text(response.compatibility);
       $("#mood").text(response.mood);
       $("#color").text(response.color);
       $("#lucky_num").text(response.lucky_number);
       $("#lucky_time").text(response.lucky_time);
 
-
-      console.log("HOROSCOPE " + horoscope1);
       callback();
       horoscope1Set(horoscope1);
 
-      // getHoroscope2(sign, getHoroscopeData);
     });
   }
 
@@ -489,8 +470,6 @@ $(document).ready(function () {
   function horoscope1Set(horoscope1) {
     $("#horoscope1").text(horoscope1);
 
-    // Get Horoscope 2 
-    getHoroscope2(astrosign, getHoroscopeData2);
   }
 
   // Set horoscope API info
@@ -708,7 +687,7 @@ $(document).ready(function () {
 
       $("#airIndex").text(airIndex);
 
-      return airIndex;
+      // return airIndex;
       // callback();
     });
   }
@@ -731,19 +710,19 @@ $(document).ready(function () {
       url: queryPollenURL,
       dataType: "json",
     }).then(function (response) {
-      // options = response.description;
-      console.log(response);
-      resp = response.data[0].types;
-      console.log(resp);
+      
+      // Types of pollen
+      var pollen = response.data[0].types;
+   
 
       try {
         // Check Out of Season
-        if (!resp.grass.in_season) {
-          resp.grass.index.value = "Out of season";
-          resp.grass.index.category = "";
+        if (!pollen.grass.in_season) {
+          pollen.grass.index.value = "Out of season";
+          pollen.grass.index.category = "";
         }
 
-        txt = "<P>Grass pollen data = " + resp.grass.index.value + " " + resp.grass.index.category + "</P>";
+        txt = "<P>Grass pollen data = " + polle.grass.index.value + " " + pollen.grass.index.category + "</P>";
         thtml += txt;
       } catch (err) {
         console.log("no grass pollen info / " + thtml);
@@ -751,11 +730,11 @@ $(document).ready(function () {
 
       try {
         // Check Out of Season
-        if (!resp.tree.in_season) {
-          resp.tree.index.value = "Out of season";
-          resp.tree.index.category = "";
+        if (!pollen.tree.in_season) {
+          pollen.tree.index.value = "Out of season";
+          pollen.tree.index.category = "";
         }
-        txt = "<P>Tree pollen data = " + resp.tree.index.value + "</P>";
+        txt = "<P>Tree pollen data = " + pollen.tree.index.value + "</P>";
         thtml += txt;
       } catch (err) {
         console.log("no tree pollen info / " + thtml);
@@ -763,17 +742,17 @@ $(document).ready(function () {
 
       try {
         // Check Out of Season
-        if (!resp.weed.in_season) {
-          resp.weed.index.value = "Out of season";
-          resp.weed.index.category = "";
+        if (!pollen.weed.in_season) {
+          pollen.weed.index.value = "Out of season";
+          pollen.weed.index.category = "";
         }
-        txt = "<P>Weed pollen data = " + resp.weed.index.value + "</P>";
+        txt = "<P>Weed pollen data = " + pollen.weed.index.value + "</P>";
         thtml += txt;
       } catch (err) {
         console.log("no weed pollen info / " + thtml);
       }
       $("#pollenData").html(thtml);
-      return resp;
+      // return pollen;
       // callback();
     });
   }
