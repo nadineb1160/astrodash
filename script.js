@@ -111,6 +111,8 @@ $(document).ready(function () {
       // Prevent Default Form Behavior
       event.preventDefault();
 
+      $("#submitted").show();
+
       // Get Birthday Date
       month = $("#bdayMonth").val();
       day = $("#bdayDay").val();
