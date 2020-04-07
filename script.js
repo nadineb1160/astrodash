@@ -84,15 +84,15 @@ $(document).ready(function () {
     messages: {
       bdayMonth: {
         required: "Please enter a month - MM",
-        length: "Search term must be 2 characters long"
+        minlength: "Search term must be 2 characters long"
       },
       bdayDay: {
         required: "Please enter a day - DD",
-        length: "Search term must be 2 characters long"
+        minlength: "Search term must be 2 characters long"
       },
       bdayYear: {
         required: "Please enter a year - YYYY",
-        length: "Search term must be 4 characters long"
+        minlength: "Search term must be 4 characters long"
       },
       city: {
         required: "Please enter a city",
