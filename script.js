@@ -34,10 +34,6 @@ $(document).ready(function () {
   // Hide Data
   $("#content").hide();
 
-  // var horoscope = "";
-
-  // var tsign = "";
-
   // Variable to track which horoscope we are on
   var horoscopeNum = 1;
 
@@ -316,21 +312,26 @@ $(document).ready(function () {
   // Callback function for horoscope call
   function getHoroscopeData1() {
 
-    sentiment1 = getSentiment(horoscope1);
+    getSentiment(horoscope1);
+    // console.log("sentemintent1: " + sentiment1)
 
-    keyword1 = getKeyword(horoscope1, wordSet1(keyword1, sentiment1));
+    getKeyword(horoscope1);
+
+    // wordSet1(keyword1, sentiment1)
 
     // wordSet1(keyword1, sentiment1);
 
     getHoroscope2(astrosign, getHoroscopeData2);
+    
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
 
-    sentiment2 = getSentiment(horoscope2);
+    getSentiment(horoscope2);
 
-    keyword1 = getKeyword(horoscope2, wordSet2(keyword2, sentiment2));
+    getKeyword(horoscope2);
 
+    wordSet2(keyword2, sentiment2)
     // wordSet2(keyword2, sentiment2);
   }
 
@@ -358,12 +359,18 @@ $(document).ready(function () {
       //   console.log(response);
       var sentiment = response.sentiment.type
       console.log("sentType = " + response.sentiment.type);
-
-      return sentiment
+      console.log(sentiment);
+      if (horoscopeNum === 1) {
+        $("#sentiment1").text(sentiment);
+      }
+      else if (horoscopeNum === 2) {
+        $("#sentiment2").text(sentiment);
+      }
+      // return sentiment
     });
   }
 
-  function getKeyword(horoscope, callback) {
+  function getKeyword(horoscope) {
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryKeywordURL =
@@ -403,8 +410,16 @@ $(document).ready(function () {
 
       var keyword = arr[rand].label;
 
-      return keyword;
-      callback();
+      if (horoscopeNum === 1) {
+        $("#keyword1").text(keyword);
+      }
+      else if (horoscopeNum === 2) {
+        $("#keyword2").text(keyword);
+
+      }
+
+      // return keyword;
+      // callback();
     });
   }
 
