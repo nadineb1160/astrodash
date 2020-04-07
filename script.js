@@ -43,9 +43,6 @@ $(document).ready(function () {
   // Variable for sentiment
   var keyword1, sentiment1, keyword2, sentiment2;
 
-  // Variable for horoscope2 API search
-  var intensity, mood2, keywordsHoro, intensity;
-
   // Variable for birthday
   var month, day, year, date;
 
@@ -102,7 +99,7 @@ $(document).ready(function () {
     getHoroscope1(astrosign, getHoroscopeData1);
 
     // Get Horoscope 2 
-    getHoroscope2(astrosign, getHoroscopeData2);
+    // getHoroscope2(astrosign, getHoroscopeData2);
 
 
     timerSet(date);
@@ -306,33 +303,32 @@ $(document).ready(function () {
   }
 
   // Callback function for horoscope call
-  function getHoroscopeData1() { 
+  function getHoroscopeData1(callback) { 
 
     isHoro1 = true;
+    isHoro2 = false;
 
     getSentiment(horoscope1);
     // console.log("sentemintent1: " + sentiment1)
 
-    getKeyword(horoscope1);
-
-    // wordSet1(keyword1, sentiment1)
-
-    // wordSet1(keyword1, sentiment1);
+    getKeyword(horoscope1, getHoroscope2(astrosign, getHoroscopeData2));
 
     // getHoroscope2(astrosign, getHoroscopeData2);
-    console.log("is horoscope num 1 " + isHoro1);
+    // console.log("is horoscope num 1 " + isHoro1);
 
 
   }
   // Callback function for horoscope call
   function getHoroscopeData2() {
 
+    isHoro1 = false;
     isHoro2 = true;
-    console.log("is horoscope num 1" + isHoro2);
+    console.log("is horoscope num 1 " + isHoro1);
+    console.log("is horoscope num 2" + isHoro2);
 
     getSentiment(horoscope2);
 
-    getKeyword(horoscope2);
+    getKeyword(horoscope2, horoscope2Set(horoscope2));
 
     // wordSet2(keyword2, sentiment2)
     // wordSet2(keyword2, sentiment2);
@@ -361,18 +357,23 @@ $(document).ready(function () {
       var sentiment = response.sentiment.type
 
       console.log("sentiment " + sentiment)
+      console.log("is horoscope num 1 " + isHoro1);
+      console.log("is horoscope num 2" + isHoro2);
+
       // Set sentiment text
       if (isHoro1) {
+        console.log("sent1");
         $("#sentiment1").text(sentiment);
       }
       else if (isHoro2) {
+        console.log("sent2");
         $("#sentiment2").text(sentiment);
       }
       // return sentiment
     });
   }
 
-  function getKeyword(horoscope) {
+  function getKeyword(horoscope, callback) {
     token = "8921d8d3e0274f0997aa91de967aca75";
 
     queryKeywordURL =
@@ -399,9 +400,11 @@ $(document).ready(function () {
       var keyword = arr[rand].label;
 
       if (isHoro1) {
+        console.log("key1");
         $("#keyword1").text(keyword);
       }
       else if (isHoro2) {
+        console.log("key2");
         $("#keyword2").text(keyword);
 
       }
@@ -460,8 +463,8 @@ $(document).ready(function () {
       $("#keywordsHoro").text(response.meta.keywords);
       $("#intensity").text(response.meta.intensity);
       callback();
-      // Set Horoscope 2
-      horoscope2Set(horoscope2);
+      // // Set Horoscope 2
+      // horoscope2Set(horoscope2);
     });
 
   }
