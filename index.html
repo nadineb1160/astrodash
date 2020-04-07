@@ -43,7 +43,7 @@
                 <div class="uk-modal-dialog" id="bday-form">
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                    <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top">
+                    <form class="uk-position-medium uk-overlay uk-overlay-default uk-position-top" id="form">
                         <fieldset class="uk-fieldset">
 
                             <legend class="uk-legend">Fill in your infomation to see your dashboard!</legend>
@@ -55,17 +55,17 @@
                                 <h4>Enter Your Birthday:</h4>
                                 <!-- Month Input -->
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" id="bday-month" placeholder="MM">
+                                    <input class="uk-input" type="text" id="bdayMonth" placeholder="MM">
                                 </div>
 
                                 <!-- Day Input -->
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" id="bday-day" placeholder="DD">
+                                    <input class="uk-input" type="text" id="bdayDay" placeholder="DD">
                                 </div>
 
                                 <!-- Year Input -->
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" id="bday-year" placeholder="YYYY">
+                                    <input class="uk-input" type="text" id="bdayYear" placeholder="YYYY">
                                 </div>
 
                             </div>
@@ -331,7 +331,7 @@
             <!-- Chinese Zodiac Name -->
             <p id="zodiacName"></p>
         </h3>
-        
+
         <br>
 
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
@@ -439,6 +439,12 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <!-- Validation -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 </body>
 
 </html>
